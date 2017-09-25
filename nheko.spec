@@ -30,13 +30,18 @@ for Matrix that feels more like a mainstream chat app (Riot,
 Telegram etc) and less like an IRC client.
 
 %prep
+# Unpacking main tarball with sources...
 %autosetup -n %{name}-%{commit0} -p1
 
+# Unpacking addtional libraries...
 pushd libs
     rm -rf lmdbxx
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
 popd
+
+# Patching desktop file...
+sed -i 's@Version=0.1@Version=1.0@g' resources/%{name}.desktop
 
 %build
 %cmake -DCMAKE_BUILD_TYPE=Release .
@@ -49,7 +54,7 @@ install -m 0755 -p %{name} "%{buildroot}%{_bindir}/%{name}"
 
 # Installing shared libraries...
 mkdir -p "%{buildroot}%{_libdir}"
-install -m 0755 -p libmatrix_events.so "%{buildroot}%{_libdir}/libmatrix_events.so"
+install -m 0755 -p libmatrix_events.so "%{buildroot}%{_libdir}/libmatrix_events.so.0"
 
 # Installing icons...
 for size in 16 32 48 64 128 256 512; do
@@ -62,6 +67,8 @@ done
 desktop-file-install --dir="%{buildroot}%{_datadir}/applications" resources/%{name}.desktop
 
 # Installing additional locales...
+mkdir -p "%{buildroot}%{_datarootdir}/%{name}/translations"
+find . -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroot}%{_datarootdir}/%{name}/translations \;
 %find_lang %{name} --with-qt
 
 %post
@@ -80,8 +87,9 @@ fi
 
 %files -f %{name}.lang
 %doc README.md
-%license COPYING
+%license LICENSE
 %{_bindir}/%{name}
+%{_libdir}/*.so.*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
