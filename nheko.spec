@@ -16,7 +16,9 @@ URL: https://github.com/mujx/nheko
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 
+BuildRequires: cmake(Qt5LinguistTools)
 BuildRequires: qt5-qtbase-devel
+BuildRequires: lmdb-devel
 BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
@@ -36,11 +38,11 @@ pushd libs
 popd
 
 %build
-%cmake -DCMAKE_BUILD_TYPE=Release .
-%make_build
+%cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release
+%make_build -C build
 
 %install
-%make_install
+%make_install -C build
 
 %post
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
