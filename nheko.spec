@@ -17,6 +17,7 @@ Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 
 BuildRequires: cmake(Qt5LinguistTools)
+BuildRequires: desktop-file-utils
 BuildRequires: qt5-qtbase-devel
 BuildRequires: lmdb-devel
 BuildRequires: gcc-c++
@@ -38,17 +39,37 @@ pushd libs
 popd
 
 %build
-%cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release
-%make_build -C build
+%cmake -DCMAKE_BUILD_TYPE=Release .
+%make_build
 
 %install
-%make_install -C build
+# Installing binaries...
+mkdir -p "%{buildroot}%{_bindir}"
+install -m 0755 -p %{name} "%{buildroot}%{_bindir}/%{name}"
+
+# Installing shared libraries...
+mkdir -p "%{buildroot}%{_libdir}"
+install -m 0755 -p libmatrix_events.so "%{buildroot}%{_libdir}/libmatrix_events.so"
+
+# Installing icons...
+for size in 16 32 48 64 128 256 512; do
+    dir="%{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps"
+    install -d "$dir"
+    install -m 0644 -p resources/%{name}-${size}.png "$dir/%{name}.png"
+done
+
+# Installing desktop shortcut...
+desktop-file-install --dir="%{buildroot}%{_datadir}/applications" resources/%{name}.desktop
+
+# Installing additional locales...
 %find_lang %{name} --with-qt
 
 %post
+/sbin/ldconfig
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
+/sbin/ldconfig
 if [ $1 -eq 0 ] ; then
     /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
