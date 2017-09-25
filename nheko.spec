@@ -43,6 +43,7 @@ popd
 
 %install
 %make_install -C build
+%find_lang %{name} --with-qt
 
 %post
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
@@ -56,7 +57,7 @@ fi
 %posttrans
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
-%files
+%files -f %{name}.lang
 %doc README.md
 %license COPYING
 %{_bindir}/%{name}
