@@ -2,6 +2,9 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global date 20170924
 
+%global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
+%global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
+
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0
@@ -11,6 +14,7 @@ License: GPLv3+
 URL: https://github.com/mujx/nheko
 
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 
 BuildRequires: qt5-qtbase-devel
 BuildRequires: gcc-c++
@@ -24,6 +28,12 @@ Telegram etc) and less like an IRC client.
 
 %prep
 %autosetup -n %{name}-%{commit0} -p1
+
+pushd libs
+    rm -rf lmdbxx
+    tar -xf %{SOURCE1}
+    mv lmdbxx-%{commit1} lmdbxx
+popd
 
 %build
 %cmake -DCMAKE_BUILD_TYPE=Release .
