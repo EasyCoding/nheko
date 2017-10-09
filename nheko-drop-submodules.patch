@@ -1,0 +1,28 @@
+From a57c14fb65b86fdb1ef01af134b1b6adb5906a6d Mon Sep 17 00:00:00 2001
+From: Vitaly Zaitsev <vitaly@easycoding.org>
+Date: Mon, 9 Oct 2017 19:25:42 +0200
+Subject: [PATCH] Drop Git submodules from cmake manifest.
+
+---
+ CMakeLists.txt | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6415b91..3473043 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -29,11 +29,6 @@ else()
+     find_package_handle_standard_args(LMDB DEFAULT_MSG LMDB_INCLUDE_DIR LMDB_LIBRARY)
+ endif()
+ 
+-if (NOT EXISTS "${CMAKE_SOURCE_DIR}/libs/lmdbxx/.git" )
+-    message(WARNING "The git submodules are not available.")
+-    message(STATUS "Running git submodule update --init --recursive ...")
+-    execute_process(COMMAND git submodule update --init --recursive)
+-endif()
+ 
+ #
+ # Discover Qt dependencies.
+-- 
+2.13.6
+
