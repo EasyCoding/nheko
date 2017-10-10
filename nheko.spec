@@ -42,9 +42,6 @@ pushd libs
     mv lmdbxx-%{commit1} lmdbxx
 popd
 
-# Patching desktop file...
-sed -i 's@Version=0.1@Version=1.0@g' resources/%{name}.desktop
-
 %build
 %cmake -DCMAKE_BUILD_TYPE=Release .
 %make_build
