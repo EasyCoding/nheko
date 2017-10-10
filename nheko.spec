@@ -17,7 +17,7 @@ Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 
 Patch0: %{name}-drop-submodules.patch
-Patch1: %{name}-nheko-drop-flags.patch
+Patch1: %{name}-drop-flags.patch
 
 BuildRequires: cmake(Qt5LinguistTools)
 BuildRequires: desktop-file-utils
