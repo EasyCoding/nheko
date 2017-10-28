@@ -8,7 +8,7 @@
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0
-Release: 6.%{date}git%{shortcommit0}%{?dist}
+Release: 7.%{date}git%{shortcommit0}%{?dist}
 
 License: GPLv3+
 URL: https://github.com/mujx/nheko
@@ -94,6 +94,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Sat Oct 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-7.20171027git845228a
+- Updated to latest snapshot.
+
 * Sat Oct 21 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-6.20171021git3cae6c3
 - Updated to latest snapshot.
 
