@@ -1,6 +1,6 @@
-%global commit0 0f363b5f4424cc4cdf0e36d7aa5b62b8e8ea52bc
+%global commit0 e4c8a555d6ae48621f6c2c697774fc5052c9e36a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20171124
+%global date 20171126
 
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
