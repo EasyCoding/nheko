@@ -19,10 +19,13 @@ Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{
 Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
 
-BuildRequires: cmake(Qt5LinguistTools)
+BuildRequires: cmake(Qt5Widgets)
+BuildRequires: cmake(Qt5Network)
 BuildRequires: cmake(Qt5Multimedia)
+BuildRequires: cmake(Qt5Concurrent)
+BuildRequires: cmake(Qt5LinguistTools)
+
 BuildRequires: desktop-file-utils
-BuildRequires: qt5-qtbase-devel
 BuildRequires: lmdb-devel
 BuildRequires: gcc-c++
 BuildRequires: cmake
