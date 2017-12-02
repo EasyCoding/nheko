@@ -20,6 +20,7 @@ Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
 
 BuildRequires: cmake(Qt5LinguistTools)
+BuildRequires: cmake(Qt5Multimedia)
 BuildRequires: desktop-file-utils
 BuildRequires: qt5-qtbase-devel
 BuildRequires: lmdb-devel
