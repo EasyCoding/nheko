@@ -5,6 +5,9 @@
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
+%global commit2 0b43ca87d8cfabba392dfe884eb1edb83874de02
+%global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
+
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0
@@ -15,6 +18,7 @@ URL: https://github.com/mujx/nheko
 
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
+Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
 
 Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
@@ -45,6 +49,13 @@ pushd libs
     rm -rf lmdbxx
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
+popd
+
+# Unpacking addtional libraries...
+pushd libs
+    rm -rf matrix-structs
+    tar -xf %{SOURCE2}
+    mv matrix-structs-%{commit2} matrix-structs
 popd
 
 %build
