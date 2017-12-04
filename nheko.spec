@@ -5,7 +5,7 @@
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
-%global commit2 0b43ca87d8cfabba392dfe884eb1edb83874de02
+%global commit2 ea10ea843bccebf54b7b4ebdf1be92a3624597b4
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
 Summary: Desktop client for the Matrix protocol
