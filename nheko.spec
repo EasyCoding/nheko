@@ -82,10 +82,6 @@ popd
 mkdir -p "%{buildroot}%{_bindir}"
 install -m 0755 -p %{name} "%{buildroot}%{_bindir}/%{name}"
 
-# Installing shared libraries...
-#mkdir -p "%{buildroot}%{_libdir}"
-#install -m 0755 -p libmatrix_events.so "%{buildroot}%{_libdir}/libmatrix_events.so.0"
-
 # Installing icons...
 for size in 16 32 48 64 128 256 512; do
     dir="%{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps"
@@ -102,11 +98,9 @@ find . -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroo
 %find_lang %{name} --with-qt
 
 %post
-/sbin/ldconfig
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
-/sbin/ldconfig
 if [ $1 -eq 0 ] ; then
     /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
