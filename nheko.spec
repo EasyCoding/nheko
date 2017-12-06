@@ -38,7 +38,6 @@ BuildRequires: cmake(Qt5Multimedia)
 BuildRequires: cmake(Qt5Concurrent)
 BuildRequires: cmake(Qt5LinguistTools)
 
-BuildRequires: mapbox-variant-devel
 BuildRequires: desktop-file-utils
 BuildRequires: lmdb-devel
 BuildRequires: gcc-c++
