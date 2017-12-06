@@ -1,12 +1,15 @@
-%global commit0 b9c4a819ade7798c0c464151cc086bae911a1654
+%global commit0 e1a4458a10ded40dc1ff0088411df9d7e0b02a4f
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20171204
+%global date 20171206
 
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
-%global commit2 ea10ea843bccebf54b7b4ebdf1be92a3624597b4
+%global commit2 e046ab4f2fa1fc0ca387af5df688d4d4b38362d1
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
+
+%global commit3 61a3fc94b05389819578c9ff3baef0de2d6cccb7
+%global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
 Summary: Desktop client for the Matrix protocol
 Name: nheko
@@ -19,6 +22,8 @@ URL: https://github.com/mujx/nheko
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
+Source3: https://github.com/mpark/variant/archive/%{commit3}.tar.gz#/mpark-variant-%{shortcommit3}.tar.gz
+Source4: https://github.com/nlohmann/json/raw/v2.1.1/src/json.hpp#/nlohmann-json-2.1.1.hpp
 
 Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
@@ -31,7 +36,6 @@ BuildRequires: cmake(Qt5LinguistTools)
 
 BuildRequires: mapbox-variant-devel
 BuildRequires: desktop-file-utils
-BuildRequires: json-devel
 BuildRequires: lmdb-devel
 BuildRequires: gcc-c++
 BuildRequires: cmake
@@ -44,20 +48,29 @@ Telegram etc) and less like an IRC client.
 
 %prep
 # Unpacking main tarball with sources...
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -n %{name}-%{commit0}
 
-# Unpacking addtional libraries...
+# Unpacking lmdbxx...
 pushd libs
     rm -rf lmdbxx
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
 popd
 
-# Unpacking addtional libraries...
+# Unpacking matrix-structs...
 pushd libs
     rm -rf matrix-structs
     tar -xf %{SOURCE2}
     mv matrix-structs-%{commit2} matrix-structs
+    pushd matrix-structs
+        pushd deps
+            rm -rf variant
+            tar -xf %{SOURCE3}
+            mv variant-%{commit3} variant
+            mkdir -p json/src
+            cp -f %{SOURCE4} json/src/json.hpp
+        popd
+    popd
 popd
 
 %build
@@ -70,8 +83,8 @@ mkdir -p "%{buildroot}%{_bindir}"
 install -m 0755 -p %{name} "%{buildroot}%{_bindir}/%{name}"
 
 # Installing shared libraries...
-mkdir -p "%{buildroot}%{_libdir}"
-install -m 0755 -p libmatrix_events.so "%{buildroot}%{_libdir}/libmatrix_events.so.0"
+#mkdir -p "%{buildroot}%{_libdir}"
+#install -m 0755 -p libmatrix_events.so "%{buildroot}%{_libdir}/libmatrix_events.so.0"
 
 # Installing icons...
 for size in 16 32 48 64 128 256 512; do
@@ -106,7 +119,6 @@ fi
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
-%{_libdir}/*.so.*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
