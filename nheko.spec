@@ -1,13 +1,17 @@
+# Git revision of nheko...
 %global commit0 e1a4458a10ded40dc1ff0088411df9d7e0b02a4f
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global date 20171206
 
+# Git revision of lmdbxx...
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
+# Git revision of matrix-structs...
 %global commit2 e046ab4f2fa1fc0ca387af5df688d4d4b38362d1
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
+# Git revision of mpark-variant...
 %global commit3 61a3fc94b05389819578c9ff3baef0de2d6cccb7
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
