@@ -8,7 +8,7 @@
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 # Git revision of matrix-structs...
-%global commit2 e046ab4f2fa1fc0ca387af5df688d4d4b38362d1
+%global commit2 f3bc8dedd00c0006eee85357b4a943578055ec45
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
 # Git revision of mpark-variant...
