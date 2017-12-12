@@ -1,29 +1,30 @@
-From 567d8de2cdfe12ef876b0c41c4f7a744e0ef649f Mon Sep 17 00:00:00 2001
+From 8ada0267dc49be1a4d8721e6fad0a9c050845e4f Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
-Date: Tue, 10 Oct 2017 17:18:17 +0200
-Subject: [PATCH] Removed extra CXXFLAGS.
+Date: Tue, 12 Dec 2017 15:25:45 +0100
+Subject: [PATCH 2/2] Completely remove additional CXXFLAGS.
 
 ---
- CMakeLists.txt | 6 ------
- 1 file changed, 6 deletions(-)
+ CMakeLists.txt | 7 -------
+ 1 file changed, 7 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3473043..539504e 100644
+index 1db1066..c0eff34 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -94,12 +94,6 @@ message(STATUS "Version: ${PROJECT_VERSION}")
+@@ -109,13 +109,6 @@ set(PROJECT_VERSION ${CPACK_PACKAGE_VERSION})
+ message(STATUS "Version: ${PROJECT_VERSION}")
  
  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
 -        -Wall \
 -        -Wextra \
--        -march=native \
 -        -Werror \
 -        -pipe \
 -        -pedantic \
-         -Wunreachable-code")
+-        -Wunreachable-code")
  
      if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+         execute_process(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
 -- 
-2.13.6
+2.14.3
 
