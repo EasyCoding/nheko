@@ -11,10 +11,6 @@
 %global commit2 d03a370ffd1bbdd5623afbe9817d1b929bc76cd7
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
-# Git revision of mpark-variant...
-%global commit3 61a3fc94b05389819578c9ff3baef0de2d6cccb7
-%global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
-
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0
@@ -23,11 +19,11 @@ Release: 21.%{date}git%{shortcommit0}%{?dist}
 License: GPLv3+
 URL: https://github.com/mujx/nheko
 
+# Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
-Source3: https://github.com/mpark/variant/archive/%{commit3}.tar.gz#/mpark-variant-%{shortcommit3}.tar.gz
-Source4: https://github.com/nlohmann/json/raw/v2.1.1/src/json.hpp#/nlohmann-json-2.1.1.hpp
+Source3: header_only.tar.gz
 
 Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
@@ -66,13 +62,7 @@ pushd libs
     tar -xf %{SOURCE2}
     mv matrix-structs-%{commit2} matrix-structs
     pushd matrix-structs
-        pushd deps
-            rm -rf variant
-            tar -xf %{SOURCE3}
-            mv variant-%{commit3} variant
-            mkdir -p json/src
-            cp -f %{SOURCE4} json/src/json.hpp
-        popd
+        tar -xf %{SOURCE3}
     popd
 popd
 
