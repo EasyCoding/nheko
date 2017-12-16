@@ -10,3 +10,7 @@ echo " Done."
 echo -n "Generating tarball..."
 tar czf header_only.tar.gz deps
 echo " Done."
+
+echo -n "Removing temporary files..."
+rm -rf deps
+echo " Done."
