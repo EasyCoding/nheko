@@ -27,6 +27,7 @@ Source3: header_only.tar.gz
 
 Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
+Patch2: %{name}-drop-rpath.patch
 
 BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Qt5Network)
@@ -75,6 +76,10 @@ popd
 mkdir -p "%{buildroot}%{_bindir}"
 install -m 0755 -p %{name} "%{buildroot}%{_bindir}/%{name}"
 
+# Installing shared libraries...
+mkdir -p "%{buildroot}%{_libdir}"
+install -m 0755 -p libs/matrix-structs/libmatrix_structs.so "%{buildroot}%{_libdir}/libmatrix_structs.so.0"
+
 # Installing icons...
 for size in 16 32 48 64 128 256 512; do
     dir="%{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps"
@@ -91,9 +96,11 @@ find . -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroo
 %find_lang %{name} --with-qt
 
 %post
+/sbin/ldconfig
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
+/sbin/ldconfig
 if [ $1 -eq 0 ] ; then
     /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
@@ -106,6 +113,7 @@ fi
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
+%{_libdir}/*.so.*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 

@@ -1,0 +1,21 @@
+From 098411d0e215d5dd23898125fca5c04c440dbc48 Mon Sep 17 00:00:00 2001
+From: Vitaly Zaitsev <vitaly@easycoding.org>
+Date: Sat, 16 Dec 2017 18:20:43 +0100
+Subject: [PATCH 3/3] Remove rpath.
+
+---
+ CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 84be606..bf136ed 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -313,3 +313,4 @@ else()
+     add_executable (nheko ${OS_BUNDLE} ${NHEKO_DEPS})
+     target_link_libraries (nheko ${NHEKO_LIBS} Qt5::Multimedia)
+ endif()
++set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)
+-- 
+2.14.3
+

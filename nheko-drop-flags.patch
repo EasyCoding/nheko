@@ -1,14 +1,14 @@
-From 8ada0267dc49be1a4d8721e6fad0a9c050845e4f Mon Sep 17 00:00:00 2001
+From 0f80da0b800ad0f73c21f4561366bf3cf41b5b98 Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Tue, 12 Dec 2017 15:25:45 +0100
-Subject: [PATCH 2/2] Completely remove additional CXXFLAGS.
+Subject: [PATCH 2/3] Completely remove additional CXXFLAGS.
 
 ---
  CMakeLists.txt | 7 -------
  1 file changed, 7 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1db1066..c0eff34 100644
+index b0144ea..84be606 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -109,13 +109,6 @@ set(PROJECT_VERSION ${CPACK_PACKAGE_VERSION})
