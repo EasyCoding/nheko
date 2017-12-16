@@ -1,14 +1,14 @@
 # Git revision of nheko...
-%global commit0 7e24a468b5762a1f40710eb4b4a7b522659567c7
+%global commit0 b5e692bb28e741be4421d3127c507344fde7bf41
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20171212
+%global date 20171216
 
 # Git revision of lmdbxx...
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 # Git revision of matrix-structs...
-%global commit2 d7227d213c253f784b3fd470e0ac98165d2de568
+%global commit2 6bfd6362c57e687904ed1fbb622f4bdaae038cc3
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
 Summary: Desktop client for the Matrix protocol
@@ -63,6 +63,7 @@ pushd libs
     tar -xf %{SOURCE2}
     mv matrix-structs-%{commit2} matrix-structs
     pushd matrix-structs
+        sed -i 's@add_library(${LIBRARY_NAME} ${SRC})@add_library(${LIBRARY_NAME} STATIC ${SRC})@g' CMakeLists.txt
         tar -xf %{SOURCE3}
     popd
 popd
@@ -75,10 +76,6 @@ popd
 # Installing binaries...
 mkdir -p "%{buildroot}%{_bindir}"
 install -m 0755 -p %{name} "%{buildroot}%{_bindir}/%{name}"
-
-# Installing shared libraries...
-mkdir -p "%{buildroot}%{_libdir}"
-install -m 0755 -p libs/matrix-structs/libmatrix_structs.so "%{buildroot}%{_libdir}/libmatrix_structs.so.0"
 
 # Installing icons...
 for size in 16 32 48 64 128 256 512; do
@@ -96,11 +93,9 @@ find . -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroo
 %find_lang %{name} --with-qt
 
 %post
-/sbin/ldconfig
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
-/sbin/ldconfig
 if [ $1 -eq 0 ] ; then
     /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
@@ -113,12 +108,11 @@ fi
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
-%{_libdir}/*.so.*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
-* Sat Dec 16 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-22.20171212git7e24a46
+* Sat Dec 16 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-22.20171216gitb5e692b
 - Updated to latest snapshot.
 
 * Tue Dec 12 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-21.20171212git6aa635e
