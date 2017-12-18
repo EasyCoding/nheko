@@ -1,7 +1,7 @@
 # Git revision of nheko...
 %global commit0 101bf47443a1005f09e5369f232719cd9b67c189
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20171216
+%global date 20171217
 
 # Git revision of lmdbxx...
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
@@ -112,7 +112,7 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
-* Mon Dec 18 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-24.20171216git101bf47
+* Mon Dec 18 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-24.20171217git101bf47
 - Updated to latest snapshot.
 
 * Sun Dec 17 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-23.20171216git474e52b
