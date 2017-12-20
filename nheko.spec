@@ -1,14 +1,14 @@
 # Git revision of nheko...
-%global commit0 101bf47443a1005f09e5369f232719cd9b67c189
+%global commit0 f11044b5eb9cf42cc71930b567b7566f1293a936
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20171217
+%global date 20171219
 
 # Git revision of lmdbxx...
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 # Git revision of matrix-structs...
-%global commit2 f73d3cd8d38f84312b9b459b3a6b499ac2eb0681
+%global commit2 582c6956c464e80f738c57ded239c3fb613f1c24
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
 Summary: Desktop client for the Matrix protocol
