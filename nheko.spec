@@ -70,8 +70,8 @@ pushd libs
 popd
 
 %build
-%cmake -DCMAKE_BUILD_TYPE=Release .
-%make_build
+%cmake -G Ninja -DCMAKE_BUILD_TYPE=Release .
+%ninja_build
 
 %install
 # Installing binaries...
