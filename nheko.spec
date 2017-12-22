@@ -36,6 +36,7 @@ BuildRequires: cmake(Qt5Concurrent)
 BuildRequires: cmake(Qt5LinguistTools)
 
 BuildRequires: desktop-file-utils
+BuildRequires: ninja-build
 BuildRequires: lmdb-devel
 BuildRequires: gcc-c++
 BuildRequires: cmake
