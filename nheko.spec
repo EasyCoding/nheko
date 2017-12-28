@@ -1,26 +1,21 @@
-# Git revision of nheko...
-%global commit0 6835a97b15f642829ffe168464aeb1eae8f7b6a9
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20171224
-
 # Git revision of lmdbxx...
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 # Git revision of matrix-structs...
-%global commit2 01c71e8fcea5c1686348af4866c87270194e5ab9
+%global commit2 ac12b8c60becfb593779ab3f25ff0cfe1547fdfe
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
 Summary: Desktop client for the Matrix protocol
 Name: nheko
-Version: 0
-Release: 28.%{date}git%{shortcommit0}%{?dist}
+Version: 0.1.0
+Release: 1%{?dist}
 
 License: GPLv3+
 URL: https://github.com/mujx/nheko
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
-Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
 Source3: header_only.tar.gz
@@ -49,7 +44,7 @@ Telegram etc) and less like an IRC client.
 
 %prep
 # Unpacking main tarball with sources...
-%autosetup -n %{name}-%{commit0}
+%autosetup -p1
 
 # Unpacking lmdbxx...
 pushd libs
@@ -113,6 +108,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Thu Dec 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-2
+- Updated to version 0.1.0.
+
 * Sun Dec 24 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-28.20171224git6835a97
 - Updated to latest snapshot.
 
