@@ -74,24 +74,16 @@ popd
 %ninja_build
 
 %install
-# Installing binaries...
-mkdir -p "%{buildroot}%{_bindir}"
-install -m 0755 -p %{name} "%{buildroot}%{_bindir}/%{name}"
-
-# Installing icons...
-for size in 16 32 48 64 128 256 512; do
-    dir="%{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps"
-    install -d "$dir"
-    install -m 0644 -p resources/%{name}-${size}.png "$dir/%{name}.png"
-done
-
-# Installing desktop shortcut...
-desktop-file-install --dir="%{buildroot}%{_datadir}/applications" resources/%{name}.desktop
+# Installing application...
+%make_install
 
 # Installing additional locales...
 mkdir -p "%{buildroot}%{_datarootdir}/%{name}/translations"
 find . -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroot}%{_datarootdir}/%{name}/translations \;
 %find_lang %{name} --with-qt
+
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %post
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
