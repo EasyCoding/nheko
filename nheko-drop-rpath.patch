@@ -1,4 +1,4 @@
-From 098411d0e215d5dd23898125fca5c04c440dbc48 Mon Sep 17 00:00:00 2001
+From ef0e66934c48abd474d2996c9cfc3382d8ad6dcf Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Sat, 16 Dec 2017 18:20:43 +0100
 Subject: [PATCH 3/3] Remove rpath.
@@ -8,12 +8,12 @@ Subject: [PATCH 3/3] Remove rpath.
  1 file changed, 1 insertion(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 84be606..bf136ed 100644
+index e481b11..e1f0143 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -313,3 +313,4 @@ else()
-     add_executable (nheko ${OS_BUNDLE} ${NHEKO_DEPS})
-     target_link_libraries (nheko ${NHEKO_LIBS} Qt5::Multimedia)
+@@ -350,3 +350,4 @@ if(UNIX AND NOT APPLE)
+             COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+     endif()
  endif()
 +set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)
 -- 

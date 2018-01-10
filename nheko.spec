@@ -20,7 +20,7 @@ License: GPLv3+
 URL: https://github.com/mujx/nheko
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
-Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
 Source3: header_only.tar.gz
@@ -49,7 +49,8 @@ Telegram etc) and less like an IRC client.
 
 %prep
 # Unpacking main tarball with sources...
-%autosetup -p1
+%autosetup -n %{name}-%{commit0} -p1
+mkdir %{_target_platform}
 
 # Unpacking lmdbxx...
 pushd libs
@@ -70,16 +71,18 @@ pushd libs
 popd
 
 %build
-%cmake -G Ninja -DCMAKE_BUILD_TYPE=Release .
-%ninja_build
+pushd %{_target_platform}
+    %cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
+popd
+%ninja_build -C %{_target_platform}
 
 %install
 # Installing application...
-%make_install
+%ninja_install -C %{_target_platform}
 
 # Installing additional locales...
 mkdir -p "%{buildroot}%{_datarootdir}/%{name}/translations"
-find . -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroot}%{_datarootdir}/%{name}/translations \;
+find %{_target_platform} -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroot}%{_datarootdir}/%{name}/translations \;
 %find_lang %{name} --with-qt
 
 %check
@@ -101,6 +104,8 @@ fi
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/translations
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
@@ -108,7 +113,7 @@ fi
 * Wed Jan 10 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-2.20180110git7f3b6c4
 - Updated to latest snapshot.
 
-* Thu Dec 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-2
+* Thu Dec 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1
 - Updated to version 0.1.0.
 
 * Sun Dec 24 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-28.20171224git6835a97
