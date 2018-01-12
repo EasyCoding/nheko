@@ -1,7 +1,7 @@
 # Git revision of nheko...
-%global commit0 8beef5e61f6210714a0247b334da3426c6724ec3
+%global commit0 396becbaa7e159b3472a0befe12d7ade36dcabad
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180111
+%global date 20180112
 
 # Git revision of lmdbxx...
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
