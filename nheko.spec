@@ -88,18 +88,6 @@ find %{_target_platform} -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%post
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-%posttrans
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
 %files -f %{name}.lang
 %doc README.md
 %license LICENSE
