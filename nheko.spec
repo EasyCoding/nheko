@@ -16,7 +16,13 @@ Name: nheko
 Version: 0.1.0
 Release: 11.%{date}git%{shortcommit0}%{?dist}
 
-License: GPLv3+
+# Application and 3rd-party modules licensing:
+# * S0 - GPLv3+ -- main source;
+# * S1 (lmdbxx) - Public Domain -- build-time dependency (header-only);
+# * S2 (matrix-structs) - Public Domain -- build-time dependency;
+# * S3 (json) - MIT -- build-time dependency (header-only);
+# * S3 (variant) - Boost 1.0 -- build-time dependency (header-only).
+License: GPLv3+ and Unlicense and MIT and BSL 1.0
 URL: https://github.com/mujx/nheko
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
