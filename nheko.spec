@@ -1,5 +1,5 @@
 # Git revision of nheko...
-%global commit0 0e91dae9223a0b82085e28c42483122681106100
+%global commit0 597f829c57adea24b4ff75260091b4a8f86f08c0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global date 20180125
 
