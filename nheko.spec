@@ -40,6 +40,7 @@ Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
 Patch2: %{name}-drop-rpath.patch
 
+# https://github.com/mujx/nheko/pull/224
 Patch101: %{name}-add-appdata.patch
 
 BuildRequires: cmake(Qt5Widgets)
