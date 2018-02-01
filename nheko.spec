@@ -49,6 +49,7 @@ BuildRequires: cmake(Qt5Concurrent)
 BuildRequires: cmake(Qt5LinguistTools)
 
 BuildRequires: desktop-file-utils
+BuildRequires: libappstream-glib
 BuildRequires: ninja-build
 BuildRequires: lmdb-devel
 BuildRequires: gcc-c++
@@ -101,6 +102,7 @@ find %{_target_platform} -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 
 %find_lang %{name} --with-qt
 
 %check
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/%{name}.appdata.xml
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %files -f %{name}.lang
@@ -109,6 +111,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_bindir}/%{name}
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/translations
+%{_datadir}/metainfo/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
