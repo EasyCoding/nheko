@@ -22,7 +22,11 @@ Release: 14.%{date}git%{shortcommit0}%{?dist}
 # * S2 (matrix-structs) - Public Domain -- build-time dependency;
 # * S3 (json) - MIT -- build-time dependency (header-only);
 # * S3 (variant) - Boost 1.0 -- build-time dependency (header-only).
-License: GPLv3+ and Public Domain and MIT and Boost
+
+# Bundled resources licensing:
+# * emojione-android fonts - CC by (v4.0) -- bundled resource;
+# * OpenSans fonts - Apache (v2.0) -- bundled resource.
+License: GPLv3+ and Public Domain and MIT and Boost and Apache License and CC-BY-4.0
 URL: https://github.com/mujx/nheko
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
