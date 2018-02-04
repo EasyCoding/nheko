@@ -58,8 +58,7 @@ Requires: hicolor-icon-theme
 
 %description
 The motivation behind the project is to provide a native desktop app
-for Matrix that feels more like a mainstream chat app (Riot,
-Telegram etc) and less like an IRC client.
+for Matrix that feels more like a mainstream chat app.
 
 %prep
 # Unpacking main tarball with sources...
