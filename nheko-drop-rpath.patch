@@ -1,4 +1,4 @@
-From ef0e66934c48abd474d2996c9cfc3382d8ad6dcf Mon Sep 17 00:00:00 2001
+From 057046ec20d94c5d90d9b6d5793624a91f78e9e9 Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Sat, 16 Dec 2017 18:20:43 +0100
 Subject: [PATCH 3/3] Remove rpath.
@@ -8,10 +8,10 @@ Subject: [PATCH 3/3] Remove rpath.
  1 file changed, 1 insertion(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e481b11..e1f0143 100644
+index 5872f2b..e245e81 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -350,3 +350,4 @@ if(UNIX AND NOT APPLE)
+@@ -352,3 +352,4 @@ if(UNIX AND NOT APPLE)
              COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
      endif()
  endif()
