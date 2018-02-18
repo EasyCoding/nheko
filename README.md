@@ -1,4 +1,4 @@
-nheko
+nheko [![COPR build](https://copr.fedorainfracloud.org/coprs/xvitaly/matrix/package/nheko/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xvitaly/matrix/package/nheko/)
 ================
 
  * Package name:		*nheko*.
