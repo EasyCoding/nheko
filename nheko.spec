@@ -1,6 +1,3 @@
-# Set some project constants...
-%global 3rdlibs .third-party
-
 # Git revision of nheko...
 %global commit0 b00365f665bcb9a250f0df025c76ac9f2a2c5d49
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -39,7 +36,7 @@ Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matri
 Source3: header_only.tar.gz
 Source4: gen_libs.sh
 
-Patch0: %{name}-drop-submodules.patch
+#Patch0: %{name}-drop-submodules.patch
 Patch1: %{name}-drop-flags.patch
 Patch2: %{name}-drop-rpath.patch
 
@@ -66,17 +63,16 @@ for Matrix that feels more like a mainstream chat app.
 %prep
 # Unpacking main tarball with sources...
 %autosetup -n %{name}-%{commit0} -p1
-mkdir %{_target_platform}
-mkdir %{3rdlibs}
+mkdir {%{_target_platform},.third-party}
 
 # Unpacking lmdbxx...
-pushd %{3rdlibs}
+pushd ".third-party"
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
 popd
 
 # Unpacking matrix-structs...
-pushd %{3rdlibs}
+pushd ".third-party"
     tar -xf %{SOURCE2}
     mv matrix-structs-%{commit2} matrix-structs
     pushd matrix-structs
