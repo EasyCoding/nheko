@@ -65,14 +65,10 @@ for Matrix that feels more like a mainstream chat app.
 %autosetup -n %{name}-%{commit0} -p1
 mkdir {%{_target_platform},.third-party}
 
-# Unpacking lmdbxx...
+# Unpacking third-party modules...
 pushd ".third-party"
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
-popd
-
-# Unpacking matrix-structs...
-pushd ".third-party"
     tar -xf %{SOURCE2}
     mv matrix-structs-%{commit2} matrix-structs
     pushd matrix-structs
