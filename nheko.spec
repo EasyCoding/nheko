@@ -1,3 +1,6 @@
+# Set some project constants...
+%global 3rdlibs .third-party
+
 # Git revision of nheko...
 %global commit0 b00365f665bcb9a250f0df025c76ac9f2a2c5d49
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -64,17 +67,16 @@ for Matrix that feels more like a mainstream chat app.
 # Unpacking main tarball with sources...
 %autosetup -n %{name}-%{commit0} -p1
 mkdir %{_target_platform}
+mkdir %{3rdlibs}
 
 # Unpacking lmdbxx...
-pushd libs
-    rm -rf lmdbxx
+pushd %{3rdlibs}
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
 popd
 
 # Unpacking matrix-structs...
-pushd libs
-    rm -rf matrix-structs
+pushd %{3rdlibs}
     tar -xf %{SOURCE2}
     mv matrix-structs-%{commit2} matrix-structs
     pushd matrix-structs
