@@ -36,9 +36,8 @@ Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matri
 Source3: header_only.tar.gz
 Source4: gen_libs.sh
 
-#Patch0: %{name}-drop-submodules.patch
-Patch1: %{name}-drop-flags.patch
-Patch2: %{name}-drop-rpath.patch
+Patch0: %{name}-drop-flags.patch
+Patch1: %{name}-drop-rpath.patch
 
 BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Qt5Network)
@@ -64,14 +63,15 @@ for Matrix that feels more like a mainstream chat app.
 # Unpacking main tarball with sources...
 %autosetup -n %{name}-%{commit0} -p1
 mkdir {%{_target_platform},.third-party}
+sed -i '/GIT_/d' cmake/*.cmake
 
 # Unpacking third-party modules...
 pushd ".third-party"
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
     tar -xf %{SOURCE2}
-    mv matrix-structs-%{commit2} matrix-structs
-    pushd matrix-structs
+    mv matrix-structs-%{commit2} matrix_structs
+    pushd matrix_structs
         sed -i 's@add_library(${LIBRARY_NAME} ${SRC})@add_library(${LIBRARY_NAME} STATIC ${SRC})@g' CMakeLists.txt
         tar -xf %{SOURCE3}
     popd

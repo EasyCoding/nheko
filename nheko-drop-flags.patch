@@ -1,17 +1,17 @@
-From 3747834c19601ec29ecc875ebb5e6a956fbe6c26 Mon Sep 17 00:00:00 2001
+From 52f116af8325656a013688f98d84f54cb0dac817 Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Tue, 12 Dec 2017 15:25:45 +0100
-Subject: [PATCH 2/3] Completely remove additional CXXFLAGS.
+Subject: [PATCH 1/2] Completely remove additional CXXFLAGS.
 
 ---
  CMakeLists.txt | 7 -------
  1 file changed, 7 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b7b61fb..5872f2b 100644
+index 3f0c44e..611a59a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -111,13 +111,6 @@ set(PROJECT_VERSION ${CPACK_PACKAGE_VERSION})
+@@ -110,13 +110,6 @@ set(PROJECT_VERSION ${CPACK_PACKAGE_VERSION})
  message(STATUS "Version: ${PROJECT_VERSION}")
  
  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
