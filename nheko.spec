@@ -49,6 +49,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
 BuildRequires: ninja-build
 BuildRequires: lmdb-devel
+BuildRequires: doxygen
 BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
