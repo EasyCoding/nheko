@@ -8,7 +8,7 @@
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
 # Git revision of matrix-structs...
-%global commit2 baf455a6fee01be8235815c60e1231a8183ef1a3
+%global commit2 4debe73fc653664e54667dba98aeac80939e3432
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
 Summary: Desktop client for the Matrix protocol
