@@ -37,8 +37,9 @@ URL: https://github.com/mujx/nheko
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
-Source3: header_only.tar.gz
-Source4: gen_libs.sh
+Source3: https://github.com/mobius3/tweeny/archive/%{commit3}.tar.gz#/tweeny-%{shortcommit3}.tar.gz
+Source4: header_only.tar.gz
+Source5: gen_libs.sh
 
 Patch0: %{name}-drop-flags.patch
 Patch1: %{name}-drop-rpath.patch
