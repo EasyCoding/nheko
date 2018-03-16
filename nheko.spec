@@ -81,6 +81,8 @@ pushd ".third-party"
         sed -i 's@add_library(${LIBRARY_NAME} ${SRC})@add_library(${LIBRARY_NAME} STATIC ${SRC})@g' CMakeLists.txt
         tar -xf %{SOURCE3}
     popd
+    tar -xf %{SOURCE3}
+    mv tweeny-%{commit3} tweeny
 popd
 
 %build
