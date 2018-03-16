@@ -11,6 +11,10 @@
 %global commit2 850100c0ac2b5a04720b2a1f09270749bf99f7dd
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
+# Git revision of tweeny...
+%global commit3 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
+%global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
+
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.2.1
