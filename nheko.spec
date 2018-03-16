@@ -77,12 +77,12 @@ pushd ".third-party"
     mv lmdbxx-%{commit1} lmdbxx
     tar -xf %{SOURCE2}
     mv matrix-structs-%{commit2} matrix_structs
-    pushd matrix_structs
-        sed -i 's@add_library(${LIBRARY_NAME} ${SRC})@add_library(${LIBRARY_NAME} STATIC ${SRC})@g' CMakeLists.txt
-        tar -xf %{SOURCE3}
-    popd
     tar -xf %{SOURCE3}
     mv tweeny-%{commit3} tweeny
+    pushd matrix_structs
+        sed -i 's@add_library(${LIBRARY_NAME} ${SRC})@add_library(${LIBRARY_NAME} STATIC ${SRC})@g' CMakeLists.txt
+        tar -xf %{SOURCE4}
+    popd
 popd
 
 %build
