@@ -15,6 +15,14 @@
 %global commit3 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
+# Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
+# build under Fedora <= 28 using clang.
+%if 0%{?fedora} <= 28
+%bcond_with clang
+%else
+%bcond_without clang
+%endif
+
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.2.1
@@ -60,6 +68,11 @@ BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
 
+%if %{with clang}
+BuildRequires: clang
+BuildRequires: llvm
+%endif
+
 Requires: hicolor-icon-theme
 
 %description
@@ -87,6 +100,11 @@ pushd ".third-party"
 popd
 
 %build
+%if %{with clang}
+export CC=clang
+export CXX=clang++
+%endif
+
 pushd %{_target_platform}
     %cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
 popd
