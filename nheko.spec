@@ -18,9 +18,9 @@
 # Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
 # build under Fedora <= 28 using clang.
 %if 0%{?fedora} < 28
-%bcond_with clang
-%else
 %bcond_without clang
+%else
+%bcond_with clang
 %endif
 
 Summary: Desktop client for the Matrix protocol
