@@ -95,6 +95,7 @@ pushd ".third-party"
     mv tweeny-%{commit3} tweeny
     pushd matrix_structs
         sed -i 's@add_library(${LIBRARY_NAME} ${SRC})@add_library(${LIBRARY_NAME} STATIC ${SRC})@g' CMakeLists.txt
+        sed -i '/-Werror/d' CMakeLists.txt
         tar -xf %{SOURCE4}
     popd
 popd
