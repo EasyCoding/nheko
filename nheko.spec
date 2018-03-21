@@ -16,11 +16,11 @@
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
 # Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
-# build under Fedora <= 28 using clang.
-%if 0%{?fedora} < 28
-%bcond_without clang
-%else
+# build under some Fedora releases using clang.
+%if (0%{?fedora} < 27) || (0%{?fedora} >= 28)
 %bcond_with clang
+%else
+%bcond_without clang
 %endif
 
 Summary: Desktop client for the Matrix protocol
