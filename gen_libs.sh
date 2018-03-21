@@ -9,6 +9,11 @@ echo " Done."
 
 echo -n "Generating tarball..."
 tar czf header_only.tar.gz deps
+nf=header_only-$(sha256sum header_only.tar.gz | awk '{print substr ($1, 0, 7)}').tar.gz
+echo " Done."
+
+echo -n "Renaming tarball to $nf..."
+mv header_only.tar.gz $nf
 echo " Done."
 
 echo -n "Removing temporary files..."
