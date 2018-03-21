@@ -15,9 +15,8 @@
 %global commit3 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
-# Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
-# build under some Fedora releases using clang.
-%if (0%{?fedora} < 27) || (0%{?fedora} >= 28)
+# Build using clang on all modern Fedora releases.
+%if (0%{?fedora} < 27)
 %bcond_with clang
 %else
 %bcond_without clang
