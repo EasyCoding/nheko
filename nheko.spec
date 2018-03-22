@@ -17,10 +17,10 @@
 
 # Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
 # build under some Fedora releases using clang.
-%if (0%{?fedora} < 27) || (0%{?fedora} >= 28)
-%bcond_with clang
-%else
+%if 0%{?fedora} == 27
 %bcond_without clang
+%else
+%bcond_with clang
 %endif
 
 Summary: Desktop client for the Matrix protocol
@@ -53,14 +53,6 @@ Source5: gen_libs.sh
 Patch0: %{name}-drop-flags.patch
 Patch1: %{name}-drop-rpath.patch
 
-%if %{with clang}
-BuildRequires: clang
-BuildRequires: llvm
-%else
-BuildRequires: gcc-c++
-BuildRequires: gcc
-%endif
-
 BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Qt5Network)
 BuildRequires: cmake(Qt5Multimedia)
@@ -71,8 +63,15 @@ BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
 BuildRequires: ninja-build
 BuildRequires: lmdb-devel
+BuildRequires: gcc-c++
 BuildRequires: doxygen
 BuildRequires: cmake
+BuildRequires: gcc
+
+%if %{with clang}
+BuildRequires: clang
+BuildRequires: llvm
+%endif
 
 Requires: hicolor-icon-theme
 
