@@ -53,6 +53,7 @@ Source5: gen_libs.sh
 Patch0: %{name}-drop-flags.patch
 Patch1: %{name}-drop-rpath.patch
 
+BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Qt5Network)
 BuildRequires: cmake(Qt5Multimedia)
