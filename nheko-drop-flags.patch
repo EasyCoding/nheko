@@ -1,4 +1,4 @@
-From 92c594dbf50352a8618584f42d8934905eb5e012 Mon Sep 17 00:00:00 2001
+From 689d4bade1496cacddb242fb8fb7dbc229984b3a Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Tue, 12 Dec 2017 15:25:45 +0100
 Subject: [PATCH 1/2] Completely remove additional CXXFLAGS.
