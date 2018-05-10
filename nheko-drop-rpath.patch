@@ -1,4 +1,4 @@
-From c17fd49779d0a2fad9f6a0bfa57c303e5461f14f Mon Sep 17 00:00:00 2001
+From 7030ed9d39b8575628e6437001ba47c0441f0cc4 Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Sat, 16 Dec 2017 18:20:43 +0100
 Subject: [PATCH 2/2] Remove rpath.
@@ -17,5 +17,5 @@ index b72408e..30c546e 100644
  endif()
 +set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)
 -- 
-2.14.3
+2.17.0
 
