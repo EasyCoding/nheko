@@ -1,4 +1,4 @@
-From cd984bdf366f67bb65dadf89a0eb4c7843146442 Mon Sep 17 00:00:00 2001
+From 73575d75621855e910564cece5166d71ef02d559 Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Sat, 16 Dec 2017 18:20:43 +0100
 Subject: [PATCH 2/2] Remove rpath.
@@ -8,7 +8,7 @@ Subject: [PATCH 2/2] Remove rpath.
  1 file changed, 1 insertion(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e685996..58f5733 100644
+index fffe0f7..93c1843 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -361,3 +361,4 @@ if(UNIX AND NOT APPLE)
