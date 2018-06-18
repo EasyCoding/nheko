@@ -115,6 +115,10 @@ export CXX=clang++
 pushd %{_target_platform}
     %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_BUNDLED=OFF \
+    -DUSE_BUNDLED_MATRIX_STRUCTS=OFF \
+    -DUSE_BUNDLED_MATRIX_CLIENT=OFF \
+    -DUSE_BUNDLED_OLM=OFF \
     -DUSE_BUNDLED_BOOST=OFF \
     -DUSE_BUNDLED_SPDLOG=OFF \
     ..
