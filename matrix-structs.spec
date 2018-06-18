@@ -19,6 +19,8 @@ Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: header_only-f3b7019.tar.gz
 Source2: gen_libs.sh
 
+Patch100: %{name}-soname-fix.patch
+
 BuildRequires: ninja-build
 BuildRequires: gcc-c++
 BuildRequires: doxygen
@@ -60,6 +62,7 @@ popd
 
 %install
 %ninja_install -C %{_target_platform}
+ln -s libmatrix_structs.so.%{version} %{buildroot}%{_libdir}/libmatrix_structs.so.0
 rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 
 %ldconfig_scriptlets
@@ -67,11 +70,12 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %files
 %doc README.md
 %license UNLICENSE
-%{_libdir}/libmatrix_structs.so
+%{_libdir}/libmatrix_structs.so.*
 
 %files devel
 %{_includedir}/mtx*
 %{_libdir}/cmake/MatrixStructs
+%{_libdir}/libmatrix_structs.so
 
 %changelog
 * Mon Jun 18 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1.20180618gitf2b3291
