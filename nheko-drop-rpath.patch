@@ -1,4 +1,4 @@
-From 73575d75621855e910564cece5166d71ef02d559 Mon Sep 17 00:00:00 2001
+From 01b2bd625ec10ff8fa9733ac236c7d8644bbcb95 Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Sat, 16 Dec 2017 18:20:43 +0100
 Subject: [PATCH 2/2] Remove rpath.
@@ -8,7 +8,7 @@ Subject: [PATCH 2/2] Remove rpath.
  1 file changed, 1 insertion(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index fffe0f7..93c1843 100644
+index 05fc05d..5151c4b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -361,3 +361,4 @@ if(UNIX AND NOT APPLE)
@@ -17,5 +17,5 @@ index fffe0f7..93c1843 100644
  endif()
 +set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)
 -- 
-2.17.0
+2.17.1
 
