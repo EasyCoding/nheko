@@ -15,6 +15,10 @@
 %global commit3 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
+# Git revision of mtxclient...
+%global commit4 68188721e042ff5b47ea9a87aa97d3a9efbca989
+%global shortcommit4 %(c=%{commit4}; echo ${c:0:7})
+
 # Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
 # build under some Fedora releases using clang.
 %if 0%{?fedora} == 27
@@ -47,8 +51,9 @@ Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
 Source3: https://github.com/mobius3/tweeny/archive/%{commit3}.tar.gz#/tweeny-%{shortcommit3}.tar.gz
-Source4: header_only-f3b7019.tar.gz
-Source5: gen_libs.sh
+Source4: https://github.com/mujx/mtxclient/archive/%{commit2}.tar.gz#/mtxclient-%{shortcommit2}.tar.gz
+Source5: header_only-f3b7019.tar.gz
+Source6: gen_libs.sh
 
 Patch0: %{name}-drop-flags.patch
 Patch1: %{name}-drop-rpath.patch
