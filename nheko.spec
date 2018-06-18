@@ -62,8 +62,11 @@ BuildRequires: cmake(Qt5LinguistTools)
 
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
+BuildRequires: libolm-devel
+BuildRequires: spdlog-devel
 BuildRequires: ninja-build
 BuildRequires: lmdb-devel
+BuildRequires: zlib-devel
 BuildRequires: gcc-c++
 BuildRequires: doxygen
 BuildRequires: cmake
@@ -108,7 +111,11 @@ export CXX=clang++
 %endif
 
 pushd %{_target_platform}
-    %cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
+    %cmake -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_BUNDLED_BOOST=OFF \
+    -DUSE_BUNDLED_SPDLOG=OFF \
+    ..
 popd
 %ninja_build -C %{_target_platform}
 
