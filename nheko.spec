@@ -65,6 +65,7 @@ BuildRequires: libappstream-glib
 BuildRequires: libsodium-devel
 BuildRequires: libolm-devel
 BuildRequires: spdlog-devel
+BuildRequires: boost-devel
 BuildRequires: ninja-build
 BuildRequires: lmdb-devel
 BuildRequires: zlib-devel
