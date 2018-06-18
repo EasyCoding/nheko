@@ -62,6 +62,7 @@ BuildRequires: cmake(Qt5LinguistTools)
 
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
+BuildRequires: libsodium-devel
 BuildRequires: libolm-devel
 BuildRequires: spdlog-devel
 BuildRequires: ninja-build
