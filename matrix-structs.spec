@@ -11,8 +11,8 @@ License: Public Domain
 URL: https://github.com/mujx/%{name}
 
 # * S0 - Public Domain -- main source;
-# * S2 (json) - MIT -- build-time dependency (header-only);
-# * S2 (variant) - Boost 1.0 -- build-time dependency (header-only).
+# * S1 (json) - MIT -- build-time dependency (header-only);
+# * S1 (variant) - Boost 1.0 -- build-time dependency (header-only).
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
