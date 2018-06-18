@@ -43,6 +43,8 @@ sed -i '/-Werror/d' CMakeLists.txt
 pushd %{_target_platform}
     %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_LIB_TESTS=OFF \
+    -DBUILD_LIB_EXAMPLES=OFF \
     ..
 popd
 %ninja_build -C %{_target_platform}
