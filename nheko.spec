@@ -11,14 +11,6 @@
 %global commit2 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
-# Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
-# build under some Fedora releases using clang.
-%if 0%{?fedora} == 27
-%bcond_without clang
-%else
-%bcond_with clang
-%endif
-
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.4.3
@@ -68,11 +60,6 @@ BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
 
-%if %{with clang}
-BuildRequires: clang
-BuildRequires: llvm
-%endif
-
 Requires: hicolor-icon-theme
 
 %description
@@ -95,11 +82,6 @@ pushd ".third-party"
 popd
 
 %build
-%if %{with clang}
-export CC=clang
-export CXX=clang++
-%endif
-
 pushd %{_target_platform}
     %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
@@ -112,21 +94,14 @@ popd
 # Installing application...
 %ninja_install -C %{_target_platform}
 
-# Installing additional locales...
-mkdir -p "%{buildroot}%{_datarootdir}/%{name}/translations"
-find %{_target_platform} -maxdepth 1 -type f -name "*.qm" -exec install -m 0644 -p '{}' %{buildroot}%{_datarootdir}/%{name}/translations \;
-%find_lang %{name} --with-qt
-
 %check
 appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/%{name}.appdata.xml
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%files -f %{name}.lang
+%files
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
-%dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/translations
 %{_datadir}/metainfo/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
