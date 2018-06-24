@@ -1,6 +1,6 @@
-%global commit0 f2b3291f83bfe90f28b4b6e33a86e9ce51bc507b
+%global commit0 c24cb9b38312dfa24b33413847e3238600c678cd
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180618
+%global date 20180622
 
 Name: matrix-structs
 Version: 0.1.0
@@ -78,5 +78,5 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/libmatrix_structs.so
 
 %changelog
-* Mon Jun 18 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1.20180618gitf2b3291
+* Sun Jun 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-2.20180622gitc24cb9b
 - Initial SPEC release.
