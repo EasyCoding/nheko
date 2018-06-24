@@ -11,6 +11,12 @@ License: MIT
 URL: https://github.com/mujx/%{name}
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+# Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
+Source1: header_only-f3b7019.tar.gz
+Source2: gen_libs.sh
+
+Patch1: %{name}-add-findolm.patch
+
 BuildRequires: spdlog-devel >= 0.16
 BuildRequires: matrix-structs-devel
 BuildRequires: libsodium-devel
@@ -38,6 +44,7 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 %autosetup -n %{name}-%{commit0} -p1
 mkdir -p %{_target_platform}
 sed -i '/-Werror/d' CMakeLists.txt
+tar -xf %{SOURCE1}
 
 %build
 pushd %{_target_platform}
@@ -51,15 +58,20 @@ popd
 
 %install
 %ninja_install -C %{_target_platform}
+ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.0
+rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 
 %ldconfig_scriptlets
 
 %files
 %doc README.md
 %license LICENSE
-%{_libdir}/*.so
+%{_libdir}/*.so.*
 
 %files devel
+%{_includedir}/%{name}
+%{_libdir}/cmake/MatrixClient
+%{_libdir}/*.so
 
 %changelog
 * Sun Jun 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-2.20180622git96fd35e
