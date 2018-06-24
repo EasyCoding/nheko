@@ -19,7 +19,7 @@ Release: 3.%{date}git%{shortcommit0}%{?dist}
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source;
 # * S1 (lmdbxx) - Public Domain -- build-time dependency (header-only);
-# * S3 (tweeny) - MIT -- build-time dependency (header-only);
+# * S2 (tweeny) - MIT -- build-time dependency (header-only);
 
 # Bundled resources licensing:
 # * emojione-android fonts - CC by (v4.0) -- bundled resource;
@@ -30,7 +30,7 @@ URL: https://github.com/mujx/nheko
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
-Source2: https://github.com/mobius3/tweeny/archive/%{commit3}.tar.gz#/tweeny-%{shortcommit3}.tar.gz
+Source2: https://github.com/mobius3/tweeny/archive/%{commit2}.tar.gz#/tweeny-%{shortcommit2}.tar.gz
 Source3: header_only-f3b7019.tar.gz
 Source4: gen_libs.sh
 
@@ -45,6 +45,7 @@ BuildRequires: cmake(Qt5Multimedia)
 BuildRequires: cmake(Qt5Concurrent)
 BuildRequires: cmake(Qt5LinguistTools)
 
+BuildRequires: spdlog-devel >= 0.16
 BuildRequires: matrix-structs-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
