@@ -1,6 +1,6 @@
-%global commit0 68188721e042ff5b47ea9a87aa97d3a9efbca989
+%global commit0 96fd35e57d36511b10b7d30de7227c6cd2ffa386
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180617
+%global date 20180622
 
 Name: mtxclient
 Version: 0.1.0
@@ -62,5 +62,5 @@ popd
 %files devel
 
 %changelog
-* Mon Jun 18 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1.20180617git6818872
+* Sun Jun 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-2.20180622git96fd35e
 - Initial SPEC release.
