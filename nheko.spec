@@ -1,23 +1,15 @@
 # Git revision of nheko...
-%global commit0 604cdcec8abf8a8c564111d6f55feaf94486ba6c
+%global commit0 794b9ceb1be23d20f21094843f597dc9dc6708fb
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180618
+%global date 20180623
 
 # Git revision of lmdbxx...
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
-# Git revision of matrix-structs...
-%global commit2 f2b3291f83bfe90f28b4b6e33a86e9ce51bc507b
-%global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
-
 # Git revision of tweeny...
-%global commit3 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
-%global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
-
-# Git revision of mtxclient...
-%global commit4 68188721e042ff5b47ea9a87aa97d3a9efbca989
-%global shortcommit4 %(c=%{commit4}; echo ${c:0:7})
+%global commit2 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
+%global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 
 # Due to GCC 7.3.1 regression https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84785
 # build under some Fedora releases using clang.
@@ -30,15 +22,12 @@
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.4.3
-Release: 2.%{date}git%{shortcommit0}%{?dist}
+Release: 3.%{date}git%{shortcommit0}%{?dist}
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source;
 # * S1 (lmdbxx) - Public Domain -- build-time dependency (header-only);
-# * S2 (matrix-structs) - Public Domain -- build-time dependency;
 # * S3 (tweeny) - MIT -- build-time dependency (header-only);
-# * S4 (json) - MIT -- build-time dependency (header-only);
-# * S4 (variant) - Boost 1.0 -- build-time dependency (header-only).
 
 # Bundled resources licensing:
 # * emojione-android fonts - CC by (v4.0) -- bundled resource;
@@ -49,14 +38,13 @@ URL: https://github.com/mujx/nheko
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
-Source2: https://github.com/mujx/matrix-structs/archive/%{commit2}.tar.gz#/matrix-structs-%{shortcommit2}.tar.gz
-Source3: https://github.com/mobius3/tweeny/archive/%{commit3}.tar.gz#/tweeny-%{shortcommit3}.tar.gz
-Source4: https://github.com/mujx/mtxclient/archive/%{commit2}.tar.gz#/mtxclient-%{shortcommit2}.tar.gz
-Source5: header_only-f3b7019.tar.gz
-Source6: gen_libs.sh
+Source2: https://github.com/mobius3/tweeny/archive/%{commit3}.tar.gz#/tweeny-%{shortcommit3}.tar.gz
+Source3: header_only-f3b7019.tar.gz
+Source4: gen_libs.sh
 
 Patch0: %{name}-drop-flags.patch
 Patch1: %{name}-drop-rpath.patch
+Patch2: %{name}-add-findolm.patch
 
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5Widgets)
@@ -65,17 +53,18 @@ BuildRequires: cmake(Qt5Multimedia)
 BuildRequires: cmake(Qt5Concurrent)
 BuildRequires: cmake(Qt5LinguistTools)
 
+BuildRequires: matrix-structs-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
+BuildRequires: mtxclient-devel
 BuildRequires: libsodium-devel
+BuildRequires: openssl-devel
 BuildRequires: libolm-devel
-BuildRequires: spdlog-devel
-BuildRequires: boost-devel
 BuildRequires: ninja-build
+BuildRequires: boost-devel
 BuildRequires: lmdb-devel
 BuildRequires: zlib-devel
 BuildRequires: gcc-c++
-BuildRequires: doxygen
 BuildRequires: cmake
 BuildRequires: gcc
 
@@ -95,20 +84,14 @@ for Matrix that feels more like a mainstream chat app.
 %autosetup -n %{name}-%{commit0} -p1
 mkdir {%{_target_platform},.third-party}
 sed -i '/GIT_/d' cmake/*.cmake
+tar -xf %{SOURCE3}
 
 # Unpacking third-party modules...
 pushd ".third-party"
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
     tar -xf %{SOURCE2}
-    mv matrix-structs-%{commit2} matrix_structs
-    tar -xf %{SOURCE3}
-    mv tweeny-%{commit3} tweeny
-    pushd matrix_structs
-        sed -i 's@add_library(matrix_structs ${SRC})@add_library(matrix_structs STATIC ${SRC})@g' CMakeLists.txt
-        sed -i '/-Werror/d' CMakeLists.txt
-        tar -xf %{SOURCE4}
-    popd
+    mv tweeny-%{commit2} tweeny
 popd
 
 %build
@@ -121,11 +104,6 @@ pushd %{_target_platform}
     %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
     -DUSE_BUNDLED=OFF \
-    -DUSE_BUNDLED_MATRIX_STRUCTS=OFF \
-    -DUSE_BUNDLED_MATRIX_CLIENT=OFF \
-    -DUSE_BUNDLED_OLM=OFF \
-    -DUSE_BUNDLED_BOOST=OFF \
-    -DUSE_BUNDLED_SPDLOG=OFF \
     ..
 popd
 %ninja_build -C %{_target_platform}
@@ -154,6 +132,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Sun Jun 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-3.20180623git794b9ce
+- Updated to latest snapshot.
+
 * Mon Jun 18 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-2.20180618git604cdce
 - Updated to latest snapshot.
 
