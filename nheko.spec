@@ -24,7 +24,7 @@ Release: 4.%{date}git%{shortcommit0}%{?dist}
 # Bundled resources licensing:
 # * emojione-android fonts - CC by (v4.0) -- bundled resource;
 # * OpenSans fonts - Apache (v2.0) -- bundled resource.
-License: GPLv3+ and Public Domain and MIT and Boost and ASL 2.0 and CC-BY
+License: GPLv3+ and Public Domain and MIT and ASL 2.0 and CC-BY
 URL: https://github.com/mujx/nheko
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
