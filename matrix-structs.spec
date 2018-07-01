@@ -63,8 +63,6 @@ popd
 ln -s libmatrix_structs.so.%{version} %{buildroot}%{_libdir}/libmatrix_structs.so.0
 rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 
-%ldconfig_scriptlets
-
 %files
 %doc README.md
 %license UNLICENSE
