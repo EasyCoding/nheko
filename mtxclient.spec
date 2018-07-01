@@ -15,8 +15,6 @@ Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: header_only-f3b7019.tar.gz
 Source2: gen_libs.sh
 
-Patch1: %{name}-add-findolm.patch
-
 BuildRequires: spdlog-devel >= 0.16
 BuildRequires: matrix-structs-devel
 BuildRequires: libsodium-devel
