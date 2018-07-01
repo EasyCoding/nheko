@@ -59,8 +59,6 @@ popd
 ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.0
 rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 
-%ldconfig_scriptlets
-
 %files
 %doc README.md
 %license LICENSE
