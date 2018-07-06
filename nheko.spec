@@ -44,6 +44,7 @@ BuildRequires: libsodium-devel
 BuildRequires: openssl-devel
 BuildRequires: libolm-devel
 BuildRequires: tweeny-devel
+BuildRequires: lmdbxx-devel
 BuildRequires: ninja-build
 BuildRequires: boost-devel
 BuildRequires: lmdb-devel
