@@ -7,10 +7,6 @@
 %global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 
-# Git revision of tweeny...
-%global commit2 b94ce07cfb02a0eb8ac8aaf66137dabdaea857cf
-%global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
-
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.4.3
@@ -30,7 +26,6 @@ URL: https://github.com/mujx/nheko
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
-Source2: https://github.com/mobius3/tweeny/archive/%{commit2}.tar.gz#/tweeny-%{shortcommit2}.tar.gz
 Source3: header_only-f3b7019.tar.gz
 Source4: gen_libs.sh
 
@@ -78,8 +73,6 @@ tar -xf %{SOURCE3}
 pushd ".third-party"
     tar -xf %{SOURCE1}
     mv lmdbxx-%{commit1} lmdbxx
-    tar -xf %{SOURCE2}
-    mv tweeny-%{commit2} tweeny
 popd
 
 %build
