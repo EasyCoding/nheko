@@ -10,19 +10,19 @@ Release: 5.%{date}git%{shortcommit0}%{?dist}
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source;
-# * S1 (lmdbxx) - Public Domain -- build-time dependency (header-only);
-# * S2 (tweeny) - MIT -- build-time dependency (header-only);
+# * S1 (json) - MIT -- build-time dependency (header-only);
+# * S1 (variant) - Boost 1.0 -- build-time dependency (header-only).
 
 # Bundled resources licensing:
 # * emojione-android fonts - CC by (v4.0) -- bundled resource;
 # * OpenSans fonts - Apache (v2.0) -- bundled resource.
-License: GPLv3+ and Public Domain and MIT and ASL 2.0 and CC-BY
+License: GPLv3+ and MIT and ASL 2.0 and CC-BY
 URL: https://github.com/mujx/nheko
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source3: header_only-f3b7019.tar.gz
-Source4: gen_libs.sh
+Source1: header_only-f3b7019.tar.gz
+Source2: gen_libs.sh
 
 Patch0: %{name}-drop-flags.patch
 Patch1: %{name}-drop-rpath.patch
@@ -64,7 +64,7 @@ for Matrix that feels more like a mainstream chat app.
 %autosetup -n %{name}-%{commit0} -p1
 mkdir {%{_target_platform},.third-party}
 sed -i '/GIT_/d' cmake/*.cmake
-tar -xf %{SOURCE3}
+tar -xf %{SOURCE1}
 
 %build
 pushd %{_target_platform}
