@@ -3,10 +3,6 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global date 20180701
 
-# Git revision of lmdbxx...
-%global commit1 0b43ca87d8cfabba392dfe884eb1edb83874de02
-%global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
-
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.4.3
@@ -25,7 +21,6 @@ URL: https://github.com/mujx/nheko
 
 # Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1: https://github.com/bendiken/lmdbxx/archive/%{commit1}.tar.gz#/lmdbxx-%{shortcommit1}.tar.gz
 Source3: header_only-f3b7019.tar.gz
 Source4: gen_libs.sh
 
@@ -69,12 +64,6 @@ for Matrix that feels more like a mainstream chat app.
 mkdir {%{_target_platform},.third-party}
 sed -i '/GIT_/d' cmake/*.cmake
 tar -xf %{SOURCE3}
-
-# Unpacking third-party modules...
-pushd ".third-party"
-    tar -xf %{SOURCE1}
-    mv lmdbxx-%{commit1} lmdbxx
-popd
 
 %build
 pushd %{_target_platform}
