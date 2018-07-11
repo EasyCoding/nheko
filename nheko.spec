@@ -24,9 +24,7 @@ Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: header_only-f3b7019.tar.gz
 Source2: gen_libs.sh
 
-Patch0: %{name}-drop-flags.patch
-Patch1: %{name}-drop-rpath.patch
-Patch2: %{name}-add-findolm.patch
+Patch100: %{name}-add-findolm.patch
 
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5DBus)
@@ -64,8 +62,9 @@ for Matrix that feels more like a mainstream chat app.
 %prep
 # Unpacking main tarball with sources...
 %autosetup -n %{name}-%{commit0} -p1
-mkdir {%{_target_platform},.third-party}
-sed -i '/GIT_/d' cmake/*.cmake
+mkdir -p %{_target_platform}
+sed -e '/-Wall/d' -e '/-Wextra/d' -e '/-Werror/d' -e '/-pedantic/d' -e '/-pipe/d' -i CMakeLists.txt
+echo "set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)" >> CMakeLists.txt
 tar -xf %{SOURCE1}
 
 %build
