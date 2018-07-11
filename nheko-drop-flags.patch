@@ -1,17 +1,17 @@
-From e08f6798d702ccf8b6c2687fad72a3a6e5d046bf Mon Sep 17 00:00:00 2001
+From dffb4c2bf3c083b7caed6d15ab225eb4f4815770 Mon Sep 17 00:00:00 2001
 From: Vitaly Zaitsev <vitaly@easycoding.org>
 Date: Tue, 12 Dec 2017 15:25:45 +0100
 Subject: [PATCH 1/2] Completely remove additional CXXFLAGS.
 
 ---
- CMakeLists.txt | 15 ---------------
- 1 file changed, 15 deletions(-)
+ CMakeLists.txt | 19 -------------------
+ 1 file changed, 19 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 30e2cd1..cb058c7 100644
+index 48d739d..2c3a9e9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -89,21 +89,6 @@ endif(NOT MSVC)
+@@ -90,25 +90,6 @@ endif(NOT MSVC)
  set(CMAKE_CXX_STANDARD 14)
  set(CMAKE_CXX_STANDARD_REQUIRED ON)
  set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -22,13 +22,17 @@ index 30e2cd1..cb058c7 100644
 -        -Wall \
 -        -Wextra \
 -        -Werror \
--        -Wshadow \
 -        -pipe \
 -        -pedantic \
 -        -fsized-deallocation \
 -        -fdiagnostics-color=always \
 -        -Wunreachable-code"
 -    )
+-    if (NOT CMAKE_COMPILER_IS_GNUCXX)
+-        # -Wshadow is buggy and broken in GCC, so do not enable it.
+-        # see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=79328
+-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow")
+-    endif()
 -endif()
  
  if(NOT (CMAKE_BUILD_TYPE OR CMAKE_CONFIGURATION_TYPES))
