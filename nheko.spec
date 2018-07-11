@@ -29,6 +29,7 @@ Patch1: %{name}-drop-rpath.patch
 Patch2: %{name}-add-findolm.patch
 
 BuildRequires: cmake(Qt5Svg)
+BuildRequires: cmake(Qt5Core)
 BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Qt5Network)
 BuildRequires: cmake(Qt5Multimedia)
