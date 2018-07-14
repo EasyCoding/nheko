@@ -1,10 +1,10 @@
-%global commit0 92a5e99db51301b5abf626aa872a1a87b7727634
+%global commit0 8de04afea34e95c14d1dde82af390592dfde90dd
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180707
+%global date 20180714
 
 Name: matrix-structs
 Version: 0.1.0
-Release: 3.%{date}git%{shortcommit0}%{?dist}
+Release: 4.%{date}git%{shortcommit0}%{?dist}
 Summary: De/Serializable types for events, requests/responses and identifiers
 
 License: Public Domain
@@ -74,6 +74,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/libmatrix_structs.so
 
 %changelog
+* Sat Jul 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-4.20180714git8de04af
+- Updated to latest snapshot.
+
 * Sun Jul 08 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-3.20180707git92a5e99
 - Updated to latest snapshot.
 
