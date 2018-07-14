@@ -1,12 +1,12 @@
 # Git revision of nheko...
-%global commit0 824563e38a0bbccb8186a02b720e14b73936114a
+%global commit0 c4613b210ee6003be91b7e21a44ef1a918f96657
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180712
+%global date 20180714
 
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.4.3
-Release: 10.%{date}git%{shortcommit0}%{?dist}
+Release: 11.%{date}git%{shortcommit0}%{?dist}
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source;
@@ -91,6 +91,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Sat Jul 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-11.20180714gitc4613b2
+- Updated to latest snapshot.
+
 * Thu Jul 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-10.20180712git824563e
 - Updated to latest snapshot.
 
