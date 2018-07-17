@@ -63,7 +63,7 @@ for Matrix that feels more like a mainstream chat app.
 mkdir -p %{_target_platform}
 sed -e '/-Wall/d' -e '/-Wextra/d' -e '/-Werror/d' -e '/-pedantic/d' -e '/-pipe/d' -i CMakeLists.txt
 echo "set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)" >> CMakeLists.txt
-echo "include_directories(${CMAKE_SOURCE_DIR}/include)" >> CMakeLists.txt
+echo "include_directories(include)" >> CMakeLists.txt
 tar -xf %{SOURCE1}
 
 %build
