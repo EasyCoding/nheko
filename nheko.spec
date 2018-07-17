@@ -1,12 +1,12 @@
 # Git revision of nheko...
-%global commit0 96a2c614bfb60d99bc9629f73fe1707df505ce2d
+%global commit0 40facd116ef0b6aa264f0c98e54c8c41578c8727
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180716
+%global date 20180717
 
 Summary: Desktop client for the Matrix protocol
 Name: nheko
-Version: 0.5.0
-Release: 2.%{date}git%{shortcommit0}%{?dist}
+Version: 0.5.1
+Release: 1.%{date}git%{shortcommit0}%{?dist}
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source;
@@ -63,6 +63,7 @@ for Matrix that feels more like a mainstream chat app.
 mkdir -p %{_target_platform}
 sed -e '/-Wall/d' -e '/-Wextra/d' -e '/-Werror/d' -e '/-pedantic/d' -e '/-pipe/d' -i CMakeLists.txt
 echo "set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)" >> CMakeLists.txt
+echo "include_directories(${CMAKE_SOURCE_DIR}/include)" >> CMakeLists.txt
 tar -xf %{SOURCE1}
 
 %build
@@ -91,6 +92,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Tue Jul 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-1.20180717git40facd1
+- Updated to version 0.5.1 (snapshot).
+
 * Tue Jul 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.0-2.20180716git96a2c61
 - Updated to latest snapshot.
 
