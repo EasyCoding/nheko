@@ -58,7 +58,6 @@ The motivation behind the project is to provide a native desktop app
 for Matrix that feels more like a mainstream chat app.
 
 %prep
-# Unpacking main tarball with sources...
 %autosetup -n %{name}-%{commit0} -p1
 mkdir -p %{_target_platform}
 sed -e '/-Wall/d' -e '/-Wextra/d' -e '/-Werror/d' -e '/-pedantic/d' -e '/-pipe/d' -i CMakeLists.txt
@@ -76,7 +75,6 @@ popd
 %ninja_build -C %{_target_platform}
 
 %install
-# Installing application...
 %ninja_install -C %{_target_platform}
 
 %check
