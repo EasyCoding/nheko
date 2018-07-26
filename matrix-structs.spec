@@ -11,6 +11,8 @@ License: Public Domain
 URL: https://github.com/mujx/%{name}
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
+BuildRequires: mpark-variant-devel
+BuildRequires: json-devel >= 3.1.2
 BuildRequires: ninja-build
 BuildRequires: gcc-c++
 BuildRequires: doxygen
