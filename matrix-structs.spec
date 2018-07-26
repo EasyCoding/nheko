@@ -9,15 +9,7 @@ Summary: De/Serializable types for events, requests/responses and identifiers
 
 License: Public Domain
 URL: https://github.com/mujx/%{name}
-
-# * S0 - Public Domain -- main source;
-# * S1 (json) - MIT -- build-time dependency (header-only);
-# * S1 (variant) - Boost 1.0 -- build-time dependency (header-only).
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-
-# Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
-Source1: header_only-f3b7019.tar.gz
-Source2: gen_libs.sh
 
 BuildRequires: ninja-build
 BuildRequires: gcc-c++
@@ -44,11 +36,11 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 %{summary}.
 
 %prep
-# Unpacking main tarball with sources...
 %autosetup -n %{name}-%{commit0} -p1
 mkdir -p %{_target_platform}
 sed -i '/-Werror/d' CMakeLists.txt
-tar -xf %{SOURCE1}
+echo "include_directories(%{_includedir}/nlohmann)" >> CMakeLists.txt
+echo "include_directories(%{_includedir}/mpark)" >> CMakeLists.txt
 
 %build
 pushd %{_target_platform}
