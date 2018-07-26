@@ -11,12 +11,10 @@ License: MIT
 URL: https://github.com/mujx/%{name}
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
-# Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
-Source1: header_only-f3b7019.tar.gz
-Source2: gen_libs.sh
-
 BuildRequires: spdlog-devel >= 0.16
 BuildRequires: matrix-structs-devel
+BuildRequires: json-devel >= 3.1.2
+BuildRequires: mpark-variant-devel
 BuildRequires: libsodium-devel
 BuildRequires: openssl-devel
 BuildRequires: libolm-devel
@@ -42,7 +40,8 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 %autosetup -n %{name}-%{commit0} -p1
 mkdir -p %{_target_platform}
 sed -i '/-Werror/d' CMakeLists.txt
-tar -xf %{SOURCE1}
+echo "include_directories(%{_includedir}/nlohmann)" >> CMakeLists.txt
+echo "include_directories(%{_includedir}/mpark)" >> CMakeLists.txt
 
 %build
 pushd %{_target_platform}

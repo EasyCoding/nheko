@@ -35,6 +35,8 @@ BuildRequires: cmake(Qt5LinguistTools)
 
 BuildRequires: spdlog-devel >= 0.16
 BuildRequires: matrix-structs-devel
+BuildRequires: json-devel >= 3.1.2
+BuildRequires: mpark-variant-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
 BuildRequires: mtxclient-devel
