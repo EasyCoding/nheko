@@ -4,7 +4,7 @@
 
 Name: matrix-structs
 Version: 0.1.0
-Release: 4.%{date}git%{shortcommit0}%{?dist}
+Release: 5.%{date}git%{shortcommit0}%{?dist}
 Summary: De/Serializable types for events, requests/responses and identifiers
 
 License: Public Domain
@@ -68,6 +68,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/libmatrix_structs.so
 
 %changelog
+* Thu Jul 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-5.20180714git8de04af
+- Minor SPEC fixes.
+
 * Sat Jul 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-4.20180714git8de04af
 - Updated to latest snapshot.
 
