@@ -9,20 +9,14 @@ Version: 0.5.1
 Release: 3.%{date}git%{shortcommit0}%{?dist}
 
 # Application and 3rd-party modules licensing:
-# * S0 - GPLv3+ -- main source;
-# * S1 (json) - MIT -- build-time dependency (header-only);
-# * S1 (variant) - Boost 1.0 -- build-time dependency (header-only).
+# * S0 - GPLv3+ -- main source.
 
 # Bundled resources licensing:
 # * emojione-android fonts - CC by (v4.0) -- bundled resource;
 # * OpenSans fonts - Apache (v2.0) -- bundled resource.
-License: GPLv3+ and MIT and ASL 2.0 and CC-BY
+License: GPLv3+ and ASL 2.0 and CC-BY
 URL: https://github.com/mujx/nheko
-
-# Use ./gen_libs.sh script from repository to generate tarball with header-only libraries...
 Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1: header_only-f3b7019.tar.gz
-Source2: gen_libs.sh
 
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5DBus)
@@ -64,8 +58,8 @@ for Matrix that feels more like a mainstream chat app.
 mkdir -p %{_target_platform}
 sed -e '/-Wall/d' -e '/-Wextra/d' -e '/-Werror/d' -e '/-pedantic/d' -e '/-pipe/d' -i CMakeLists.txt
 echo "set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)" >> CMakeLists.txt
-echo "include_directories(include)" >> CMakeLists.txt
-tar -xf %{SOURCE1}
+echo "include_directories(%{_includedir}/nlohmann)" >> CMakeLists.txt
+echo "include_directories(%{_includedir}/mpark)" >> CMakeLists.txt
 
 %build
 pushd %{_target_platform}
