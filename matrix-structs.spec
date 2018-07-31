@@ -4,7 +4,7 @@
 
 Name: matrix-structs
 Version: 0.1.0
-Release: 6.%{date}git%{shortcommit0}%{?dist}
+Release: 7.%{date}git%{shortcommit0}%{?dist}
 Summary: De/Serializable types for events, requests/responses and identifiers
 
 License: Public Domain
@@ -69,6 +69,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/libmatrix_structs.so
 
 %changelog
+* Tue Jul 31 2018 Florian Weimer <fweimer@redhat.com> - 0.1.0-7.20180714git8de04af
+- Rebuild with fixed binutils
+
 * Fri Jul 27 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.1.0-6.20180714git8de04af
 - Rebuild for new binutils
 
