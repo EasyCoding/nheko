@@ -1,15 +1,11 @@
-%global commit0 10894678e982bc037a0aa4cf650b89a566ccbc52
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180808
-
 Name: mtxclient
 Version: 0.1.0
-Release: 9.%{date}git%{shortcommit0}%{?dist}
+Release: 10%{?dist}
 Summary: Client API library for Matrix, built on top of Boost.Asio
 
 License: MIT
 URL: https://github.com/mujx/%{name}
-Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: spdlog-devel >= 0.16
 BuildRequires: json-devel >= 3.1.2
@@ -36,7 +32,7 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 
 %prep
 # Unpacking main tarball with sources...
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
 mkdir -p %{_target_platform}
 sed -i '/-Werror/d' CMakeLists.txt
 echo "include_directories(%{_includedir}/nlohmann)" >> CMakeLists.txt
@@ -68,6 +64,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/*.so
 
 %changelog
+* Sun Sep 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-10
+- Updated version 0.1.0 (regular release).
+
 * Sun Aug 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-9.20180808git1089467
 - Updated to latest snapshot.
 
