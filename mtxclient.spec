@@ -1,6 +1,6 @@
 Name: mtxclient
 Version: 0.1.0
-Release: 10%{?dist}
+Release: 11%{?dist}
 Summary: Client API library for Matrix, built on top of Boost.Asio
 
 License: MIT
@@ -20,12 +20,15 @@ BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
 
+Obsoletes: matrix-structs < %{?epoch:%{epoch}:}%{version}-%{release}
+
 %description
 Client API library for the Matrix protocol, built on top of Boost.Asio.
 
 %package devel
 Summary: Development files for %{name}
 Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
+Obsoletes: matrix-structs-devel < %{?epoch:%{epoch}:}%{version}-%{release}
 
 %description devel
 %{summary}.
@@ -66,6 +69,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/*.so
 
 %changelog
+* Sun Sep 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-11
+- Obsolete matrix-structs package correctly.
+
 * Sun Sep 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-10
 - Updated version 0.1.0 (regular release).
 
