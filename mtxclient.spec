@@ -60,6 +60,8 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 
 %files devel
 %{_includedir}/%{name}
+%{_includedir}/mtx
+%{_includedir}/mtx.hpp
 %{_libdir}/cmake/MatrixClient
 %{_libdir}/*.so
 
