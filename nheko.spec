@@ -77,7 +77,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/%{name}.a
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %files
-%doc README.md
+%doc README.md CHANGELOG.md
 %license LICENSE
 %{_bindir}/%{name}
 %{_datadir}/metainfo/%{name}.appdata.xml
