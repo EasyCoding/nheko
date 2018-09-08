@@ -1,11 +1,15 @@
+%global commit0 659bfe7cd9b87bb009ebc703398fd93dc098b0f0
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global date 20180908
+
 Name: mtxclient
 Version: 0.1.0
-Release: 11%{?dist}
+Release: 12.%{date}git%{shortcommit0}%{?dist}
 Summary: Client API library for Matrix, built on top of Boost.Asio
 
 License: MIT
 URL: https://github.com/mujx/%{name}
-Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires: spdlog-devel >= 0.16
 BuildRequires: json-devel >= 3.1.2
@@ -35,7 +39,7 @@ Obsoletes: matrix-structs-devel < %{?epoch:%{epoch}:}%{version}-%{release}
 
 %prep
 # Unpacking main tarball with sources...
-%autosetup -p1
+%autosetup -n %{name}-%{commit0} -p1
 mkdir -p %{_target_platform}
 sed -i '/-Werror/d' CMakeLists.txt
 echo "include_directories(%{_includedir}/nlohmann)" >> CMakeLists.txt
@@ -69,6 +73,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/*.so
 
 %changelog
+* Sat Sep 08 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-12.20180908git659bfe7
+- Updated to latest snapshot.
+
 * Sun Sep 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-11
 - Obsolete matrix-structs package correctly.
 
