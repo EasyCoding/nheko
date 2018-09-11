@@ -39,7 +39,7 @@ BuildRequires: tweeny-devel
 BuildRequires: lmdbxx-devel
 BuildRequires: ninja-build
 BuildRequires: boost-devel
-BuildRequires: maddy-devel
+BuildRequires: cmark-devel
 BuildRequires: lmdb-devel
 BuildRequires: zlib-devel
 BuildRequires: gcc-c++
