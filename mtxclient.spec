@@ -1,10 +1,10 @@
-%global commit0 659bfe7cd9b87bb009ebc703398fd93dc098b0f0
+%global commit0 99ca7480d15a82a7b8c5099be5f076c0ceecc9f7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180908
+%global date 20180918
 
 Name: mtxclient
 Version: 0.1.0
-Release: 12.%{date}git%{shortcommit0}%{?dist}
+Release: 13.%{date}git%{shortcommit0}%{?dist}
 Summary: Client API library for Matrix, built on top of Boost.Asio
 
 License: MIT
@@ -73,6 +73,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/*.so
 
 %changelog
+* Wed Sep 19 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-13.20180918git99ca748
+- Updated to latest snapshot.
+
 * Sat Sep 08 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-12.20180908git659bfe7
 - Updated to latest snapshot.
 
