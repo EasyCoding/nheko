@@ -5,11 +5,7 @@ Release: 2%{?dist}
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source.
-
-# Bundled resources licensing:
-# * emojione-android fonts - CC by (v4.0) -- bundled resource;
-# * OpenSans fonts - Apache (v2.0) -- bundled resource.
-License: GPLv3+ and ASL 2.0 and CC-BY
+License: GPLv3+
 URL: https://github.com/mujx/nheko
 Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
