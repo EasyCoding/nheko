@@ -1,11 +1,7 @@
-%global commit0 59a1b6b47c57358dd7c14314da0e5419f2b2a1c2
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global date 20180926
-
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.6.1
-Release: 1.%{date}git%{shortcommit0}%{?dist}
+Release: 2%{?dist}
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source.
@@ -15,7 +11,7 @@ Release: 1.%{date}git%{shortcommit0}%{?dist}
 # * OpenSans fonts - Apache (v2.0) -- bundled resource.
 License: GPLv3+ and ASL 2.0 and CC-BY
 URL: https://github.com/mujx/nheko
-Source0: %{url}/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5DBus)
@@ -53,7 +49,7 @@ The motivation behind the project is to provide a native desktop app
 for Matrix that feels more like a mainstream chat app.
 
 %prep
-%autosetup -n %{name}-%{commit0} -p1
+%autosetup -p1
 mkdir -p %{_target_platform}
 sed -e '/-Wall/d' -e '/-Wextra/d' -e '/-Werror/d' -e '/-pedantic/d' -e '/-pipe/d' -i CMakeLists.txt
 echo "set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)" >> CMakeLists.txt
@@ -85,395 +81,71 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
-* Wed Sep 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.1-1.20180926git59a1b6b
-- Updated to version 0.6.1 (snapshot).
+* Wed Sep 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.1-2
+- Fixed bogus changelog entry.
 
-* Sat Sep 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.0-1.20180921gitdec643e
-- Updated to version 0.6.0 (snapshot).
+* Wed Sep 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.1-1
+- Updated to version 0.6.1.
 
-* Wed Sep 19 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.5-5.20180918gitf108b8b
-- Updated to latest snapshot.
-
-* Wed Sep 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.5-4.20180912gite9ee299
-- Updated to latest snapshot.
-
-* Tue Sep 11 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.5-3.20180911git1f2e12f
-- Updated to latest snapshot.
-
-* Sat Sep 08 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.5-2.20180908git72333ae
-- Updated to latest snapshot.
+* Sat Sep 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.0-1
+- Updated to version 0.6.0.
 
 * Sun Sep 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.5-1
 - Updated to version 0.5.5.
 
-* Wed Aug 29 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.4-2.20180829git183975b
-- Updated to latest snapshot.
+* Wed Aug 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.4-1
+- Updated to version 0.5.4.
 
-* Wed Aug 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.4-1.20180821git199a4ea
-- Updated to version 0.5.4 (snapshot).
+* Wed Aug 15 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.3-2
+- Backported patch with crash fix on logout.
 
-* Wed Aug 15 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.3-2.20180813git04c888c
-- Updated to latest snapshot.
+* Sun Aug 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.3-1
+- Updated to version 0.5.3.
 
-* Sun Aug 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.3-1.20180812git34f4071
-- Updated to version 0.5.3 (snapshot).
+* Tue Jul 31 2018 Florian Weimer <fweimer@redhat.com> - 0.5.2-2
+- Rebuild with fixed binutils
 
-* Sat Jul 28 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.2-1.20180728gitedf9f52
-- Updated to version 0.5.2 (snapshot).
+* Sat Jul 28 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.2-1
+- Updated to version 0.5.2.
 
-* Fri Jul 27 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-5.20180726gitbcdebe9
-- Updated to latest snapshot.
+* Fri Jul 27 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.5.1-2
+- Rebuild for new binutils
 
-* Thu Jul 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-4.20180726git300de36
-- Updated to latest snapshot.
+* Thu Jul 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-1
+- Updated to version 0.5.1.
 
-* Tue Jul 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-3.20180723git6583686
-- Updated to latest snapshot.
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
-* Mon Jul 23 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-2.20180722git6b42e3b
-- Updated to latest snapshot.
+* Thu Jul 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-2
+- Fixed issue with system shutdown on KDE Plasma.
 
-* Tue Jul 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-1.20180717git40facd1
-- Updated to version 0.5.1 (snapshot).
+* Sun Jun 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-1
+- Updated to version 0.4.3.
 
-* Tue Jul 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.0-2.20180716git96a2c61
-- Updated to latest snapshot.
+* Fri May 25 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.2-1
+- Updated to version 0.4.2.
 
-* Sun Jul 15 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.0-1.20180715git4059f17
-- Updated to version 0.5.0 (snapshot).
+* Thu May 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.1-1
+- Updated to version 0.4.1.
 
-* Sat Jul 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-11.20180714gitc4613b2
-- Updated to latest snapshot.
+* Fri May 04 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-1
+- Updated to version 0.4.0.
 
-* Thu Jul 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-10.20180712git824563e
-- Updated to latest snapshot.
+* Fri Apr 13 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-1
+- Updated to version 0.3.1.
 
-* Wed Jul 11 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-9.20180711git80ebe3f
-- Updated to latest snapshot.
+* Tue Apr 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-1
+- Updated to version 0.3.0.
 
-* Mon Jul 09 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-8.20180709git1312c13
-- Updated to latest snapshot.
+* Wed Mar 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-1
+- Updated to version 0.2.1.
 
-* Sun Jul 08 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-7.20180707git278eccc
-- Updated to latest snapshot.
-
-* Fri Jul 06 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-6.20180703git3bc8d79
-- Updated to latest snapshot.
-
-* Mon Jul 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-5.20180701git4073d61
-- Updated to latest snapshot.
-
-* Sun Jul 01 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-4.20180630git95ce2ef
-- Updated to latest snapshot.
-
-* Sun Jun 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-3.20180623git794b9ce
-- Updated to latest snapshot.
-
-* Mon Jun 18 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-2.20180618git604cdce
-- Updated to latest snapshot.
-
-* Sun Jun 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.3-1.20180603git54671b3
-- Updated to version 0.4.3 (snapshot).
-
-* Sun May 27 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.2-3.20180527git0fe81ec
-- Updated to latest snapshot.
-
-* Sat May 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.2-2.20180526git90595be
-- Updated to latest snapshot.
-
-* Fri May 25 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.2-1.20180525gitbcba977
-- Updated to version 0.4.2 (snapshot).
-
-* Thu May 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.1-1.20180524gitec7b3e1
-- Updated to version 0.4.1 (snapshot).
-
-* Wed May 23 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-12.20180523git3cf7ab9
-- Updated to latest snapshot.
-
-* Mon May 21 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-11.20180521git03c5f79
-- Updated to latest snapshot.
-
-* Sat May 19 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-10.20180518git9eb1c49
-- Updated to latest snapshot.
-
-* Thu May 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-9.20180517git1bc4260
-- Updated to latest snapshot.
-
-* Tue May 15 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-8.20180514gitfab4133
-- Updated to latest snapshot.
-
-* Mon May 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-7.20180514git127d0cd
-- Updated to latest snapshot.
-
-* Sun May 13 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-6.20180513git4bd4378
-- Updated to latest snapshot.
-
-* Fri May 11 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-5.20180511git18061f0
-- Updated to latest snapshot.
-
-* Wed May 09 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-4.20180509git701aa93
-- Updated to latest snapshot.
-
-* Mon May 07 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-3.20180507gitffb4383
-- Updated to latest snapshot.
-
-* Sun May 06 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-2.20180505git506cf68
-- Updated to latest snapshot.
-
-* Fri May 04 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-1.20180503git5caaa9d
-- Updated to version 0.4.0 (snapshot).
-
-* Wed May 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-9.20180502gitf1b355f
-- Updated to latest snapshot.
-
-* Mon Apr 30 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-8.20180430git21c68c5
-- Updated to latest snapshot.
-
-* Sun Apr 29 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-7.20180428gitb670241
-- Updated to latest snapshot.
-
-* Fri Apr 27 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-6.20180427gitc03b4e2
-- Updated to latest snapshot.
-
-* Thu Apr 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-5.20180425git6dfb824
-- Updated to latest snapshot.
-
-* Tue Apr 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-4.20180424git4fd8ecc
-- Updated to latest snapshot.
-
-* Sun Apr 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-3.20180422git4f6ffb6
-- Updated to latest snapshot.
-
-* Sat Apr 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-2.20180414gitca66940
-- Updated to latest snapshot.
-
-* Fri Apr 13 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.1-1.20180413git9661738
-- Updated to version 0.3.1 (snapshot).
-
-* Wed Apr 11 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-3.20180411gite032f29
-- Updated to latest snapshot.
-
-* Sun Apr 08 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-2.20180408git5125433
-- Updated to latest snapshot.
-
-* Tue Apr 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-1.20180403git8dc17cc
-- Updated to version 0.3.0 (snapshot).
-
-* Thu Mar 29 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-12.20180329git3afc76d
-- Updated to latest snapshot.
-
-* Wed Mar 28 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-11.20180328git00549e0
-- Updated to latest snapshot.
-
-* Tue Mar 27 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-10.20180327gitf467516
-- Updated to latest snapshot.
-
-* Mon Mar 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-9.20180326gitf6f4611
-- Updated to latest snapshot.
-
-* Fri Mar 23 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-8.20180322git2054aad
-- Updated to latest snapshot.
-
-* Thu Mar 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-7.20180322git64a6771
-- Updated to latest snapshot.
-
-* Wed Mar 21 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-6.20180321git480de2d
-- Updated to latest snapshot.
-
-* Tue Mar 20 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-5.20180320git42733ee
-- Updated to latest snapshot.
-
-* Sun Mar 18 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-4.20180318git48ee36f
-- Updated to latest snapshot.
-
-* Sat Mar 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-3.20180317gita6f8673
-- Updated to latest snapshot.
-
-* Fri Mar 16 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-2.20180316git4a6beca
-- Updated to latest snapshot.
-
-* Tue Mar 13 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-1.20180313git1b5e18c
-- Updated to version 0.2.1 (snapshot).
-
-* Mon Mar 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-3.20180312git39a8150
-- Updated to latest snapshot.
-
-* Sun Mar 11 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-2.20180311git290de54
-- Updated to latest snapshot.
-
-* Mon Mar 05 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-1.20180304gitd703377
-- Updated to version 0.2.0 (snapshot).
-
-* Sun Mar 04 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-30.20180304gitb15a04b
-- Updated to latest snapshot.
-
-* Sat Mar 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-29.20180303gitb00365f
-- Updated to latest snapshot.
-
-* Thu Mar 01 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-28.20180301git735d508
-- Updated to latest snapshot.
-
-* Mon Feb 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-27.20180226gitc75a136
-- Updated to latest snapshot.
-
-* Sat Feb 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-26.20180223gitf525b7e
-- Updated to latest snapshot.
-
-* Wed Feb 21 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-25.20180220git020f153
-- Updated to latest snapshot.
-
-* Tue Feb 20 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-24.20180219git127c52e
-- Updated to latest snapshot.
-
-* Mon Feb 19 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-23.20180218gita8e17b9
-- Updated to latest snapshot.
-
-* Sun Feb 18 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-22.20180217git7e2f835
-- Updated to latest snapshot.
-
-* Sat Feb 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-21.20180217git59e4148
-- Updated to latest snapshot.
-
-* Fri Feb 16 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-20.20180216gita1ea11d
-- Updated to latest snapshot.
-
-* Wed Feb 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-19.20180211git6d08e67
-- Updated to latest snapshot.
-
-* Sat Feb 10 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-18.20180210gitba8faa3
-- Updated to latest snapshot.
-
-* Sat Feb 03 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-17.20180202git43ba4d5
-- Updated to latest snapshot.
-
-* Fri Feb 02 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-16.20180202git73bc1ff
-- Updated to latest snapshot.
-
-* Thu Feb 01 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-15.20180131git96e9971
-- Added AppData manifest. Minor SPEC fixes.
-
-* Thu Feb 01 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-14.20180131git96e9971
-- Updated to latest snapshot.
-
-* Wed Jan 31 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-13.20180131git1d7548d
-- Updated to latest snapshot.
-
-* Mon Jan 29 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-12.20180129git86aa409
-- Updated to latest snapshot.
-
-* Fri Jan 26 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-11.20180125git597f829
-- Updated to latest snapshot.
-
-* Thu Jan 25 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-10.20180125git0e91dae
-- Updated to latest snapshot.
-
-* Wed Jan 24 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-9.20180123git9eedcd7
-- Updated to latest snapshot.
-
-* Mon Jan 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-8.20180122git48dabdf
-- Updated to latest snapshot.
-
-* Wed Jan 17 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-7.20180117git92a578f
-- Updated to latest snapshot.
-
-* Mon Jan 15 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-6.20180114git020a842
-- Updated to latest snapshot.
-
-* Sun Jan 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-5.20180114git4521837
-- Updated to latest snapshot.
-
-* Fri Jan 12 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-4.20180112git396becb
-- Updated to latest snapshot.
-
-* Thu Jan 11 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-3.20180111git8beef5e
-- Updated to latest snapshot.
-
-* Wed Jan 10 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-2.20180110git7f3b6c4
-- Updated to latest snapshot.
+* Mon Mar 05 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-1
+- Updated to version 0.2.0.
 
 * Thu Dec 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1
 - Updated to version 0.1.0.
-
-* Sun Dec 24 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-28.20171224git6835a97
-- Updated to latest snapshot.
-
-* Fri Dec 22 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-27.20171222gita3c1629
-- Updated to latest snapshot.
-
-* Thu Dec 21 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-26.20171219git84b5f2b
-- Updated to latest snapshot.
-
-* Wed Dec 20 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-25.20171219gitf11044b
-- Updated to latest snapshot.
-
-* Mon Dec 18 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-24.20171217git101bf47
-- Updated to latest snapshot.
-
-* Sun Dec 17 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-23.20171216git474e52b
-- Updated to latest snapshot.
-
-* Sat Dec 16 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-22.20171216gitb5e692b
-- Updated to latest snapshot.
-
-* Tue Dec 12 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-21.20171212git6aa635e
-- Updated to latest snapshot.
-
-* Mon Dec 11 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-20.20171211git3c5241c
-- Updated to latest snapshot.
-
-* Sun Dec 10 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-19.20171210gitbba3bba
-- Updated to latest snapshot.
-
-* Thu Dec 07 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-18.20171207git64e4759
-- Updated to latest snapshot.
-
-* Wed Dec 06 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-17.20171206gite1a4458
-- Updated to latest snapshot.
-
-* Mon Dec 04 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-16.20171204gitb9c4a81
-- Updated to latest snapshot.
-
-* Sat Dec 02 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-15.20171201gitf4f78b1
-- Updated to latest snapshot.
-
-* Mon Nov 27 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-14.20171127gitf1eb0bb
-- Updated to latest snapshot.
-
-* Sun Nov 26 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-13.20171126gite4c8a55
-- Updated to latest snapshot.
-
-* Fri Nov 24 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-12.20171124git0f363b5
-- Updated to latest snapshot.
-
-* Fri Nov 10 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-11.20171110gite40dab9
-- Updated to latest snapshot.
-
-* Thu Nov 09 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-10.20171109gitb586a23
-- Updated to latest snapshot.
-
-* Tue Nov 07 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-9.20171107git26904fe
-- Updated to latest snapshot.
-
-* Sun Nov 05 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-8.20171105git7a653b2
-- Updated to latest snapshot.
-
-* Sat Oct 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-7.20171027git845228a
-- Updated to latest snapshot.
-
-* Sat Oct 21 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-6.20171021git3cae6c3
-- Updated to latest snapshot.
-
-* Sat Oct 21 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-5.20171021git47d1546
-- Updated to latest snapshot.
-
-* Wed Oct 18 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-4.20171016git8390ff2
-- Updated to latest snapshot.
-
-* Tue Oct 10 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-3.20171010git7748529
-- Updated to latest snapshot.
-
-* Mon Oct 09 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-2.20171009git513f69e
-- Updated to latest snapshot.
 
 * Mon Sep 25 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 0-1.20170924git9def76a
 - Initial SPEC release.
