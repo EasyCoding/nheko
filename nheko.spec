@@ -10,7 +10,7 @@ URL: https://github.com/mujx/nheko
 Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 # Temporary patches.
-Patch100: %{name}-translation-ru.patch.patch
+Patch100: %{name}-translation-ru.patch
 
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5DBus)
