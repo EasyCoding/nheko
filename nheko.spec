@@ -1,13 +1,16 @@
 Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.6.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source.
 License: GPLv3+
 URL: https://github.com/mujx/nheko
 Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+
+# Temporary patches.
+Patch100: %{name}-translation-ru.patch.patch
 
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5DBus)
@@ -77,6 +80,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Mon Dec 10 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.2-2
+- Backported patch with localization update from maintained fork.
+
 * Sun Oct 07 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.2-1
 - Updated to version 0.6.2.
 
