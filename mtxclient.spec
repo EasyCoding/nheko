@@ -1,6 +1,6 @@
 Name: mtxclient
 Version: 0.2.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Client API library for Matrix, built on top of Boost.Asio
 
 License: MIT
@@ -69,6 +69,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/*.so
 
 %changelog
+* Sat Jan 05 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-2
+- Rebuilt due to libolm update.
+
 * Sat Sep 22 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-1
 - Updated version 0.2.0 (regular release).
 
