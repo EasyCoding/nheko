@@ -4,7 +4,7 @@ Release: 4%{?dist}
 Summary: Client API library for Matrix, built on top of Boost.Asio
 
 License: MIT
-URL: https://github.com/mujx/%{name}
+URL: https://github.com/Nheko-Reborn/%{name}
 Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires: spdlog-devel >= 0.16
