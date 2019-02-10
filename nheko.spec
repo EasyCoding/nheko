@@ -1,12 +1,12 @@
-Summary: Desktop client for the Matrix protocol
 Name: nheko
 Version: 0.6.2
 Release: 4%{?dist}
+Summary: Desktop client for the Matrix protocol
 
 # Application and 3rd-party modules licensing:
 # * S0 - GPLv3+ -- main source.
 License: GPLv3+
-URL: https://github.com/mujx/nheko
+URL: https://github.com/Nheko-Reborn/nheko
 Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 # Temporary patches.
