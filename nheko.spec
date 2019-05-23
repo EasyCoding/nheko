@@ -64,14 +64,14 @@ popd
 %ninja_install -C %{_target_platform}
 
 %check
-appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/%{name}.appdata.xml
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{name}.appdata.xml
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %files
 %doc README.md CHANGELOG.md
 %license COPYING
 %{_bindir}/%{name}
-%{_datadir}/metainfo/%{name}.appdata.xml
+%{_metainfodir}/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
