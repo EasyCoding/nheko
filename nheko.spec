@@ -69,7 +69,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %files
 %doc README.md CHANGELOG.md
-%license LICENSE
+%license COPYING
 %{_bindir}/%{name}
 %{_datadir}/metainfo/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
