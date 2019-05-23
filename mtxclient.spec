@@ -1,6 +1,6 @@
 Name: mtxclient
-Version: 0.2.0
-Release: 4%{?dist}
+Version: 0.2.1
+Release: 1%{?dist}
 Summary: Client API library for Matrix, built on top of Boost.Asio
 
 License: MIT
@@ -69,6 +69,9 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/*.so
 
 %changelog
+* Thu May 23 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.1-1
+- Updated version 0.2.1 (regular release).
+
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.2.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
