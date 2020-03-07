@@ -1,6 +1,6 @@
 Name: nheko
 Version: 0.6.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Desktop client for the Matrix protocol
 
 # Application and 3rd-party modules licensing:
@@ -8,6 +8,7 @@ Summary: Desktop client for the Matrix protocol
 License: GPLv3+
 URL: https://github.com/Nheko-Reborn/nheko
 Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch100: %{name}-modern-spdlog.patch
 
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5DBus)
@@ -76,6 +77,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.4-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
