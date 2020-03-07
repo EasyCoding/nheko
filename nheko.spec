@@ -1,6 +1,6 @@
 Name: nheko
 Version: 0.6.4
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Desktop client for the Matrix protocol
 
 # Application and 3rd-party modules licensing:
@@ -77,6 +77,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Sat Mar 07 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.4-4
+- Rebuit due to cmark update.
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
