@@ -1,3 +1,9 @@
+%bcond_without clang
+
+%if %{with clang}
+%global optflags %(echo %{optflags} | sed -e 's/-mcet//g' -e 's/-fcf-protection//g' -e 's/-fstack-clash-protection//g' -e 's/$/ -Qunused-arguments -Wno-unknown-warning-option -Wno-deprecated-declarations/')
+%endif
+
 Name: nheko
 Version: 0.7.1
 Release: 1%{?dist}
@@ -40,6 +46,12 @@ BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
 
+%if %{with clang}
+BuildRequires: compiler-rt
+BuildRequires: clang
+BuildRequires: llvm
+%endif
+
 Requires: hicolor-icon-theme
 
 %description
@@ -53,6 +65,19 @@ mkdir -p %{_target_platform}
 %build
 pushd %{_target_platform}
     %cmake -G Ninja \
+%if %{with clang}
+    -DCMAKE_C_COMPILER=%{_bindir}/clang \
+    -DCMAKE_CXX_COMPILER=%{_bindir}/clang++ \
+    -DCMAKE_AR=%{_bindir}/llvm-ar \
+    -DCMAKE_RANLIB=%{_bindir}/llvm-ranlib \
+    -DCMAKE_LINKER=%{_bindir}/llvm-ld \
+    -DCMAKE_OBJDUMP=%{_bindir}/llvm-objdump \
+    -DCMAKE_NM=%{_bindir}/llvm-nm \
+%else
+    -DCMAKE_AR=%{_bindir}/gcc-ar \
+    -DCMAKE_RANLIB=%{_bindir}/gcc-ranlib \
+    -DCMAKE_NM=%{_bindir}/gcc-nm \
+%endif
     -DCMAKE_BUILD_TYPE=Release \
     -DHUNTER_ENABLED:BOOL=OFF \
     -DUSE_BUNDLED_BOOST:BOOL=OFF \
