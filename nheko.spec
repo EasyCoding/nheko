@@ -1,15 +1,13 @@
 Name: nheko
-Version: 0.6.4
-Release: 4%{?dist}
-Summary: Desktop client for the Matrix protocol
+Version: 0.7.1
+Release: 1%{?dist}
 
-# Application and 3rd-party modules licensing:
-# * S0 - GPLv3+ -- main source.
+Summary: Desktop client for the Matrix protocol
 License: GPLv3+
 URL: https://github.com/Nheko-Reborn/nheko
-Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Patch100: %{name}-modern-spdlog.patch
+Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
+BuildRequires: cmake(Qt5Qml)
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5DBus)
 BuildRequires: cmake(Qt5Core)
@@ -17,21 +15,24 @@ BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Qt5Network)
 BuildRequires: cmake(Qt5Multimedia)
 BuildRequires: cmake(Qt5Concurrent)
+BuildRequires: cmake(Qt5QuickWidgets)
 BuildRequires: cmake(Qt5LinguistTools)
+BuildRequires: cmake(Qt5QuickCompiler)
+BuildRequires: cmake(Qt5QuickControls2)
 
+BuildRequires: mtxclient-devel >= 0.3.0
 BuildRequires: spdlog-devel >= 0.16
+BuildRequires: boost-devel >= 1.70
 BuildRequires: json-devel >= 3.1.2
 BuildRequires: mpark-variant-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
-BuildRequires: mtxclient-devel
 BuildRequires: libsodium-devel
 BuildRequires: openssl-devel
 BuildRequires: libolm-devel
 BuildRequires: tweeny-devel
 BuildRequires: lmdbxx-devel
 BuildRequires: ninja-build
-BuildRequires: boost-devel
 BuildRequires: cmark-devel
 BuildRequires: lmdb-devel
 BuildRequires: zlib-devel
@@ -48,15 +49,24 @@ for Matrix that feels more like a mainstream chat app.
 %prep
 %autosetup -p1
 mkdir -p %{_target_platform}
-sed -e '/-Wall/d' -e '/-Wextra/d' -e '/-Werror/d' -e '/-pedantic/d' -e '/-pipe/d' -i CMakeLists.txt
-echo "set_target_properties(nheko PROPERTIES SKIP_BUILD_RPATH TRUE)" >> CMakeLists.txt
-echo "include_directories(%{_includedir}/mpark)" >> CMakeLists.txt
 
 %build
 pushd %{_target_platform}
     %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
-    -DUSE_BUNDLED=OFF \
+    -DHUNTER_ENABLED:BOOL=OFF \
+    -DUSE_BUNDLED_BOOST:BOOL=OFF \
+    -DUSE_BUNDLED_SPDLOG:BOOL=OFF \
+    -DUSE_BUNDLED_OLM:BOOL=OFF \
+    -DUSE_BUNDLED_GTEST:BOOL=OFF \
+    -DUSE_BUNDLED_CMARK:BOOL=OFF \
+    -DUSE_BUNDLED_MTXCLIENT:BOOL=OFF \
+    -DUSE_BUNDLED_LMDB:BOOL=OFF \
+    -DUSE_BUNDLED_LMDBXX:BOOL=OFF \
+    -DUSE_BUNDLED_TWEENY:BOOL=OFF \
+    -DUSE_BUNDLED_JSON:BOOL=OFF \
+    -DUSE_BUNDLED_OPENSSL:BOOL=OFF \
+    -DUSE_BUNDLED_SODIUM:BOOL=OFF \
     ..
 popd
 %ninja_build -C %{_target_platform}
@@ -77,6 +87,12 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Wed Jun 03 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.7.1-1
+- Updated to version 0.7.1.
+
+* Sun May 31 2020 Jonathan Wakely <jwakely@redhat.com> - 0.6.4-5
+- Rebuilt for Boost 1.73
+
 * Sat Mar 07 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.6.4-4
 - Rebuit due to cmark update.
 
