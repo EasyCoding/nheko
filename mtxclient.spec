@@ -79,6 +79,7 @@ popd
 
 %install
 %ninja_install -C %{_target_platform}
+ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.0
 
 %files
 %doc README.md
