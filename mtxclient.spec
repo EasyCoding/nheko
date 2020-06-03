@@ -1,26 +1,24 @@
 Name: mtxclient
-Version: 0.2.1
-Release: 3%{?dist}
-Summary: Client API library for Matrix, built on top of Boost.Asio
+Version: 0.3.0
+Release: 1%{?dist}
 
 License: MIT
+Summary: Client API library for Matrix, built on top of Boost.Asio
 URL: https://github.com/Nheko-Reborn/%{name}
-Source0: %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: spdlog-devel >= 0.16
+BuildRequires: boost-devel >= 1.70
 BuildRequires: json-devel >= 3.1.2
 BuildRequires: mpark-variant-devel
 BuildRequires: libsodium-devel
 BuildRequires: openssl-devel
 BuildRequires: libolm-devel
 BuildRequires: ninja-build
-BuildRequires: boost-devel
 BuildRequires: zlib-devel
 BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
-
-Obsoletes: matrix-structs < %{?epoch:%{epoch}:}%{version}-%{release}
 
 %description
 Client API library for the Matrix protocol, built on top of Boost.Asio.
@@ -28,38 +26,39 @@ Client API library for the Matrix protocol, built on top of Boost.Asio.
 %package devel
 Summary: Development files for %{name}
 Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-Obsoletes: matrix-structs-devel < %{?epoch:%{epoch}:}%{version}-%{release}
 
 %description devel
 %{summary}.
 
 %prep
-# Unpacking main tarball with sources...
 %autosetup -p1
 mkdir -p %{_target_platform}
-sed -i '/-Werror/d' CMakeLists.txt
-echo "include_directories(%{_includedir}/nlohmann)" >> CMakeLists.txt
-echo "include_directories(%{_includedir}/mpark)" >> CMakeLists.txt
 
 %build
 pushd %{_target_platform}
     %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
-    -DBUILD_LIB_TESTS=OFF \
-    -DBUILD_LIB_EXAMPLES=OFF \
+    -DHUNTER_ENABLED:BOOL=OFF \
+    -DUSE_BUNDLED_BOOST:BOOL=OFF \
+    -DUSE_BUNDLED_SPDLOG:BOOL=OFF \
+    -DUSE_BUNDLED_OLM:BOOL=OFF \
+    -DUSE_BUNDLED_GTEST:BOOL=OFF \
+    -DUSE_BUNDLED_JSON:BOOL=OFF \
+    -DUSE_BUNDLED_OPENSSL:BOOL=OFF \
+    -DUSE_BUNDLED_SODIUM:BOOL=OFF \
+    -DBUILD_LIB_TESTS:BOOL=OFF \
+    -DBUILD_LIB_EXAMPLES:BOOL=OFF \
     ..
 popd
 %ninja_build -C %{_target_platform}
 
 %install
 %ninja_install -C %{_target_platform}
-ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.0
-rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 
 %files
 %doc README.md
 %license LICENSE
-%{_libdir}/*.so.*
+%{_libdir}/*.so.0*
 
 %files devel
 %{_includedir}/%{name}
@@ -69,6 +68,12 @@ rm -f %{buildroot}%{_includedir}/{json,variant}.hpp
 %{_libdir}/*.so
 
 %changelog
+* Wed Jun 03 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-1
+- Updated version 0.3.0.
+
+* Sat May 30 2020 Jonathan Wakely <jwakely@redhat.com> - 0.2.1-4
+- Rebuilt for Boost 1.73
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.2.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
