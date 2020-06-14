@@ -14,7 +14,7 @@ URL: https://github.com/Nheko-Reborn/nheko
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 # https://github.com/Nheko-Reborn/nheko/pull/220
-Patch100: %{name}-e1706f4.patch
+Patch100: %{name}-themes-fix.patch
 
 BuildRequires: cmake(Qt5Qml)
 BuildRequires: cmake(Qt5Svg)
