@@ -26,7 +26,7 @@ BuildRequires: cmake(Qt5LinguistTools)
 BuildRequires: cmake(Qt5QuickCompiler)
 BuildRequires: cmake(Qt5QuickControls2)
 
-BuildRequires: mtxclient-devel >= 0.3.0
+BuildRequires: mtxclient-devel >= 0.3.1
 BuildRequires: spdlog-devel >= 0.16
 BuildRequires: boost-devel >= 1.70
 BuildRequires: json-devel >= 3.1.2
