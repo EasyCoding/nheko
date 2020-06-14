@@ -5,7 +5,7 @@
 %endif
 
 Name: nheko
-Version: 0.7.1
+Version: 0.7.2
 Release: 1%{?dist}
 
 Summary: Desktop client for the Matrix protocol
@@ -112,6 +112,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Sun Jun 14 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.7.2-1
+- Updated to version 0.7.2.
+
 * Wed Jun 03 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.7.1-1
 - Updated to version 0.7.1.
 
