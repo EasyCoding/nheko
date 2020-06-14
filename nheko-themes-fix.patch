@@ -1,0 +1,22 @@
+From e1706f4df5505ebe400cb389ddf6a860557e0c77 Mon Sep 17 00:00:00 2001
+From: Lorem <notloremipsum@protonmail.com>
+Date: Sun, 14 Jun 2020 13:56:15 +0530
+Subject: [PATCH] Fix not being able to change theme
+
+---
+ src/UserSettingsPage.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/UserSettingsPage.cpp b/src/UserSettingsPage.cpp
+index 88cbd1c9..05ff6d38 100644
+--- a/src/UserSettingsPage.cpp
++++ b/src/UserSettingsPage.cpp
+@@ -271,7 +271,7 @@ UserSettings::setPresence(Presence state)
+ void
+ UserSettings::setTheme(QString theme)
+ {
+-        if (theme == theme)
++        if (theme == theme_)
+                 return;
+         theme_ = theme;
+         save();
