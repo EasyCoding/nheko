@@ -1,5 +1,5 @@
 %undefine __cmake_in_source_build
-%bcond_without clang
+%bcond_with clang
 
 %if %{with clang}
 %global optflags %(echo %{optflags} | sed -e 's/-mcet//g' -e 's/-fcf-protection//g' -e 's/-fstack-clash-protection//g' -e 's/$/ -Qunused-arguments -Wno-unknown-warning-option -Wno-deprecated-declarations/')
