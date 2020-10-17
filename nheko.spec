@@ -11,7 +11,7 @@
 
 Name: nheko
 Version: 0.7.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 Summary: Desktop client for the Matrix protocol
 License: GPLv3+
@@ -59,6 +59,9 @@ BuildRequires: compiler-rt
 BuildRequires: clang
 BuildRequires: llvm
 %endif
+
+# Require exact version of Qt due to compiled QML usage.
+%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 
 Requires: hicolor-icon-theme
 
@@ -116,6 +119,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Sat Oct 17 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.7.2-3
+- Rebuilt due to Qt update.
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.7.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
