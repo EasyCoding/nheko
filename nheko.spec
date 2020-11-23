@@ -11,7 +11,7 @@
 
 Name: nheko
 Version: 0.7.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 Summary: Desktop client for the Matrix protocol
 License: GPLv3+
@@ -119,6 +119,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Mon Nov 23 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.7.2-4
+- Rebuilt due to Qt 5.15.2 update.
+
 * Sat Oct 17 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.7.2-3
 - Rebuilt due to Qt update.
 
