@@ -1,5 +1,10 @@
 %undefine __cmake_in_source_build
+
+%if 0%{?fedora} && 0%{?fedora} >= 34
+%bcond_without clang
+%else
 %bcond_with clang
+%endif
 
 %if %{with clang}
 %global toolchain clang
@@ -15,10 +20,11 @@ URL: https://github.com/Nheko-Reborn/nheko
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: cmake(MatrixClient) >= 0.4.0
-BuildRequires: cmake(Olm) >= 3.0.0
+BuildRequires: cmake(Olm) >= 3.1.0
 BuildRequires: cmake(Qt5Concurrent)
 BuildRequires: cmake(Qt5Core)
 BuildRequires: cmake(Qt5DBus)
+BuildRequires: cmake(Qt5Keychain)
 BuildRequires: cmake(Qt5LinguistTools)
 BuildRequires: cmake(Qt5Multimedia)
 BuildRequires: cmake(Qt5Network)
@@ -30,8 +36,8 @@ BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Tweeny)
 BuildRequires: cmake(mpark_variant)
-BuildRequires: cmake(nlohmann_json) >= 3.1.2
-BuildRequires: cmake(spdlog) >= 0.16
+BuildRequires: cmake(nlohmann_json) >= 3.2.0
+BuildRequires: cmake(spdlog) >= 1.0.0
 
 BuildRequires: pkgconfig(gstreamer-1.0)
 BuildRequires: pkgconfig(gstreamer-app-1.0)
@@ -40,7 +46,7 @@ BuildRequires: pkgconfig(gstreamer-base-1.0)
 BuildRequires: pkgconfig(gstreamer-sdp-1.0)
 BuildRequires: pkgconfig(gstreamer-video-1.0)
 BuildRequires: pkgconfig(gstreamer-webrtc-1.0)
-BuildRequires: pkgconfig(libcmark)
+BuildRequires: pkgconfig(libcmark) >= 0.29.0
 BuildRequires: pkgconfig(libcrypto)
 BuildRequires: pkgconfig(libsodium)
 BuildRequires: pkgconfig(lmdb)
