@@ -2,16 +2,12 @@
 %bcond_with clang
 
 %if %{with clang}
-%if 0%{?fedora} && 0%{?fedora} >= 33
 %global toolchain clang
-%else
-%global optflags %(echo %{optflags} | sed -e 's/-mcet//g' -e 's/-fcf-protection//g' -e 's/-fstack-clash-protection//g' -e 's/$/ -Qunused-arguments -Wno-unknown-warning-option -Wno-deprecated-declarations/')
-%endif
 %endif
 
 Name: mtxclient
-Version: 0.3.1
-Release: 2%{?dist}
+Version: 0.4.0
+Release: 1%{?dist}
 
 License: MIT
 Summary: Client API library for Matrix, built on top of Boost.Asio
@@ -52,19 +48,6 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 
 %build
 %cmake -G Ninja \
-%if %{with clang}
-    -DCMAKE_C_COMPILER=%{_bindir}/clang \
-    -DCMAKE_CXX_COMPILER=%{_bindir}/clang++ \
-    -DCMAKE_AR=%{_bindir}/llvm-ar \
-    -DCMAKE_RANLIB=%{_bindir}/llvm-ranlib \
-    -DCMAKE_LINKER=%{_bindir}/llvm-ld \
-    -DCMAKE_OBJDUMP=%{_bindir}/llvm-objdump \
-    -DCMAKE_NM=%{_bindir}/llvm-nm \
-%else
-    -DCMAKE_AR=%{_bindir}/gcc-ar \
-    -DCMAKE_RANLIB=%{_bindir}/gcc-ranlib \
-    -DCMAKE_NM=%{_bindir}/gcc-nm \
-%endif
     -DCMAKE_BUILD_TYPE=Release \
     -DHUNTER_ENABLED:BOOL=OFF \
     -DUSE_BUNDLED_BOOST:BOOL=OFF \
@@ -74,6 +57,9 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
     -DUSE_BUNDLED_JSON:BOOL=OFF \
     -DUSE_BUNDLED_OPENSSL:BOOL=OFF \
     -DUSE_BUNDLED_SODIUM:BOOL=OFF \
+    -DASAN:BOOL=OFF \
+    -DCOVERAGE:BOOL=OFF \
+    -DIWYU:BOOL=OFF \
     -DBUILD_LIB_TESTS:BOOL=OFF \
     -DBUILD_LIB_EXAMPLES:BOOL=OFF
 %cmake_build
@@ -95,6 +81,9 @@ ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.
 %{_libdir}/*.so
 
 %changelog
+* Wed Jan 20 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-1
+- Updated to version 0.4.0.
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
