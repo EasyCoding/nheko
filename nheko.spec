@@ -20,7 +20,7 @@ Release: 1%{?dist}
 # qtsingleapplication-qt5 - bundled - MIT
 License: GPLv3+ and MIT and Boost
 Summary: Desktop client for the Matrix protocol
-URL: https://github.com/Nheko-Reborn/nheko
+URL: https://github.com/Nheko-Reborn/%{name}
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: cmake(MatrixClient) >= 0.4.0
@@ -76,7 +76,7 @@ Requires: hicolor-icon-theme
 Requires: qt5-qtquickcontrols2%{?_isa}
 
 # https://github.com/Nheko-Reborn/nheko/issues/391
-Provides: bundled(blurhash) = 0~git
+Provides: bundled(blurhash) = 0.0.1
 Provides: bundled(cpp-httplib) = 0.5.12
 Provides: bundled(qtsingleapplication-qt5) = 3.2.0-gitdc8042b
 
