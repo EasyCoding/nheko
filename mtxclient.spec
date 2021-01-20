@@ -61,7 +61,6 @@ Requires: %{name}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
     -DUSE_BUNDLED_GTEST:BOOL=OFF \
     -DUSE_BUNDLED_JSON:BOOL=OFF \
     -DUSE_BUNDLED_OPENSSL:BOOL=OFF \
-    -DUSE_BUNDLED_SODIUM:BOOL=OFF \
     -DASAN:BOOL=OFF \
     -DCOVERAGE:BOOL=OFF \
     -DIWYU:BOOL=OFF \
