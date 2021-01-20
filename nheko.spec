@@ -2,57 +2,59 @@
 %bcond_with clang
 
 %if %{with clang}
-%if 0%{?fedora} && 0%{?fedora} >= 33
 %global toolchain clang
-%else
-%global optflags %(echo %{optflags} | sed -e 's/-mcet//g' -e 's/-fcf-protection//g' -e 's/-fstack-clash-protection//g' -e 's/$/ -Qunused-arguments -Wno-unknown-warning-option -Wno-deprecated-declarations/')
-%endif
 %endif
 
 Name: nheko
-Version: 0.7.2
-Release: 4%{?dist}
+Version: 0.8.0
+Release: 1%{?dist}
 
 Summary: Desktop client for the Matrix protocol
 License: GPLv3+
 URL: https://github.com/Nheko-Reborn/nheko
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-# https://github.com/Nheko-Reborn/nheko/pull/220
-Patch100: %{name}-themes-fix.patch
-
-BuildRequires: cmake(Qt5Qml)
-BuildRequires: cmake(Qt5Svg)
-BuildRequires: cmake(Qt5DBus)
-BuildRequires: cmake(Qt5Core)
-BuildRequires: cmake(Qt5Widgets)
-BuildRequires: cmake(Qt5Network)
-BuildRequires: cmake(Qt5Multimedia)
+BuildRequires: cmake(MatrixClient) >= 0.4.0
+BuildRequires: cmake(Olm) >= 3.0.0
 BuildRequires: cmake(Qt5Concurrent)
-BuildRequires: cmake(Qt5QuickWidgets)
+BuildRequires: cmake(Qt5Core)
+BuildRequires: cmake(Qt5DBus)
 BuildRequires: cmake(Qt5LinguistTools)
+BuildRequires: cmake(Qt5Multimedia)
+BuildRequires: cmake(Qt5Network)
+BuildRequires: cmake(Qt5Qml)
 BuildRequires: cmake(Qt5QuickCompiler)
 BuildRequires: cmake(Qt5QuickControls2)
+BuildRequires: cmake(Qt5QuickWidgets)
+BuildRequires: cmake(Qt5Svg)
+BuildRequires: cmake(Qt5Widgets)
+BuildRequires: cmake(Tweeny)
+BuildRequires: cmake(mpark_variant)
+BuildRequires: cmake(nlohmann_json) >= 3.1.2
+BuildRequires: cmake(spdlog) >= 0.16
 
-BuildRequires: mtxclient-devel >= 0.3.1
-BuildRequires: spdlog-devel >= 0.16
+BuildRequires: pkgconfig(gstreamer-1.0)
+BuildRequires: pkgconfig(gstreamer-app-1.0)
+BuildRequires: pkgconfig(gstreamer-audio-1.0)
+BuildRequires: pkgconfig(gstreamer-base-1.0)
+BuildRequires: pkgconfig(gstreamer-sdp-1.0)
+BuildRequires: pkgconfig(gstreamer-video-1.0)
+BuildRequires: pkgconfig(gstreamer-webrtc-1.0)
+BuildRequires: pkgconfig(libcmark)
+BuildRequires: pkgconfig(libcrypto)
+BuildRequires: pkgconfig(libsodium)
+BuildRequires: pkgconfig(lmdb)
+BuildRequires: pkgconfig(openssl)
+BuildRequires: pkgconfig(zlib)
+
 BuildRequires: boost-devel >= 1.70
-BuildRequires: json-devel >= 3.1.2
-BuildRequires: mpark-variant-devel
+BuildRequires: cmake
 BuildRequires: desktop-file-utils
+BuildRequires: gcc
+BuildRequires: gcc-c++
 BuildRequires: libappstream-glib
-BuildRequires: libsodium-devel
-BuildRequires: openssl-devel
-BuildRequires: libolm-devel
-BuildRequires: tweeny-devel
 BuildRequires: lmdbxx-devel
 BuildRequires: ninja-build
-BuildRequires: cmark-devel
-BuildRequires: lmdb-devel
-BuildRequires: zlib-devel
-BuildRequires: gcc-c++
-BuildRequires: cmake
-BuildRequires: gcc
 
 %if %{with clang}
 BuildRequires: compiler-rt
@@ -60,10 +62,8 @@ BuildRequires: clang
 BuildRequires: llvm
 %endif
 
-# Require exact version of Qt due to compiled QML usage.
-%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
-
 Requires: hicolor-icon-theme
+Requires: qt5-qtquickcontrols2%{?_isa}
 
 %description
 The motivation behind the project is to provide a native desktop app
@@ -74,21 +74,13 @@ for Matrix that feels more like a mainstream chat app.
 
 %build
 %cmake -G Ninja \
-%if %{with clang}
-    -DCMAKE_C_COMPILER=%{_bindir}/clang \
-    -DCMAKE_CXX_COMPILER=%{_bindir}/clang++ \
-    -DCMAKE_AR=%{_bindir}/llvm-ar \
-    -DCMAKE_RANLIB=%{_bindir}/llvm-ranlib \
-    -DCMAKE_LINKER=%{_bindir}/llvm-ld \
-    -DCMAKE_OBJDUMP=%{_bindir}/llvm-objdump \
-    -DCMAKE_NM=%{_bindir}/llvm-nm \
-%else
-    -DCMAKE_AR=%{_bindir}/gcc-ar \
-    -DCMAKE_RANLIB=%{_bindir}/gcc-ranlib \
-    -DCMAKE_NM=%{_bindir}/gcc-nm \
-%endif
     -DCMAKE_BUILD_TYPE=Release \
+    -DCOMPILE_QML:BOOL=OFF \
     -DHUNTER_ENABLED:BOOL=OFF \
+    -DCI_BUILD:BOOL=OFF \
+    -DASAN:BOOL=OFF \
+    -DQML_DEBUGGING:BOOL=OFF \
+    -DBUILD_DOCS:BOOL=OFF \
     -DUSE_BUNDLED_BOOST:BOOL=OFF \
     -DUSE_BUNDLED_SPDLOG:BOOL=OFF \
     -DUSE_BUNDLED_OLM:BOOL=OFF \
@@ -100,6 +92,7 @@ for Matrix that feels more like a mainstream chat app.
     -DUSE_BUNDLED_TWEENY:BOOL=OFF \
     -DUSE_BUNDLED_JSON:BOOL=OFF \
     -DUSE_BUNDLED_OPENSSL:BOOL=OFF \
+    -DUSE_BUNDLED_QTKEYCHAIN:BOOL=OFF \
     -DUSE_BUNDLED_SODIUM:BOOL=OFF
 %cmake_build
 
@@ -119,6 +112,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Wed Jan 20 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.8.0-1
+- Updated to version 0.8.0.
+
 * Mon Nov 23 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.7.2-4
 - Rebuilt due to Qt 5.15.2 update.
 
