@@ -14,8 +14,12 @@ Name: nheko
 Version: 0.8.0
 Release: 1%{?dist}
 
+# Main source - GPLv3+
+# cpp-httplib - bundled - MIT
+# blurhash - bundled - Boost
+# qtsingleapplication-qt5 - bundled - MIT
+License: GPLv3+ and MIT and Boost
 Summary: Desktop client for the Matrix protocol
-License: GPLv3+
 URL: https://github.com/Nheko-Reborn/nheko
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
@@ -70,6 +74,11 @@ BuildRequires: llvm
 
 Requires: hicolor-icon-theme
 Requires: qt5-qtquickcontrols2%{?_isa}
+
+# https://github.com/Nheko-Reborn/nheko/issues/391
+Provides: bundled(blurhash) = 0~git
+Provides: bundled(cpp-httplib) = 0.5.12
+Provides: bundled(qtsingleapplication-qt5) = 3.2.0-gitdc8042b
 
 %description
 The motivation behind the project is to provide a native desktop app
