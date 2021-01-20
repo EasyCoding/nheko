@@ -75,6 +75,9 @@ BuildRequires: llvm
 Requires: hicolor-icon-theme
 Requires: qt5-qtquickcontrols2%{?_isa}
 
+Recommends: google-noto-emoji-color-fonts
+Recommends: google-noto-emoji-fonts
+
 # https://github.com/Nheko-Reborn/nheko/issues/391
 Provides: bundled(blurhash) = 0.0.1
 Provides: bundled(cpp-httplib) = 0.5.12
