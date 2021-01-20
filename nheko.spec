@@ -52,7 +52,6 @@ BuildRequires: pkgconfig(gstreamer-video-1.0)
 BuildRequires: pkgconfig(gstreamer-webrtc-1.0)
 BuildRequires: pkgconfig(libcmark) >= 0.29.0
 BuildRequires: pkgconfig(libcrypto)
-BuildRequires: pkgconfig(libsodium)
 BuildRequires: pkgconfig(lmdb)
 BuildRequires: pkgconfig(openssl)
 BuildRequires: pkgconfig(zlib)
@@ -113,8 +112,7 @@ for Matrix that feels more like a mainstream chat app.
     -DUSE_BUNDLED_TWEENY:BOOL=OFF \
     -DUSE_BUNDLED_JSON:BOOL=OFF \
     -DUSE_BUNDLED_OPENSSL:BOOL=OFF \
-    -DUSE_BUNDLED_QTKEYCHAIN:BOOL=OFF \
-    -DUSE_BUNDLED_SODIUM:BOOL=OFF
+    -DUSE_BUNDLED_QTKEYCHAIN:BOOL=OFF
 %cmake_build
 
 %install

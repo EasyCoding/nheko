@@ -1,5 +1,4 @@
 %undefine __cmake_in_source_build
-%global _lto_cflags %{nil}
 %bcond_with clang
 
 %if %{with clang}
@@ -8,25 +7,30 @@
 
 Name: mtxclient
 Version: 0.4.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: MIT
 Summary: Client API library for Matrix, built on top of Boost.Asio
 URL: https://github.com/Nheko-Reborn/%{name}
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires: spdlog-devel >= 0.16
+# https://github.com/Nheko-Reborn/mtxclient/commit/ea8bccf111ee9af510c3a28ff8a30e9b16e2ff66
+Patch100: %{name}-lto-fixes.patch
+
+BuildRequires: cmake(mpark_variant)
+BuildRequires: cmake(nlohmann_json) >= 3.1.2
+BuildRequires: cmake(Olm) >= 3.1.0
+BuildRequires: cmake(spdlog) >= 0.16
+
+BuildRequires: pkgconfig(libcrypto)
+BuildRequires: pkgconfig(openssl)
+BuildRequires: pkgconfig(zlib)
+
 BuildRequires: boost-devel >= 1.70
-BuildRequires: json-devel >= 3.1.2
-BuildRequires: mpark-variant-devel
-BuildRequires: libsodium-devel
-BuildRequires: openssl-devel
-BuildRequires: libolm-devel
-BuildRequires: ninja-build
-BuildRequires: zlib-devel
-BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
+BuildRequires: gcc-c++
+BuildRequires: ninja-build
 
 %if %{with clang}
 BuildRequires: compiler-rt
@@ -82,6 +86,9 @@ ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.
 %{_libdir}/*.so
 
 %changelog
+* Wed Jan 20 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-3
+- Backported upstream patch with LTO fixes.
+
 * Wed Jan 20 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-2
 - Disabled LTO due to nheko linkage issues.
 
