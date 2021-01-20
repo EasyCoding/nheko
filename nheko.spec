@@ -80,6 +80,9 @@ Provides: bundled(blurhash) = 0.0.1
 Provides: bundled(cpp-httplib) = 0.5.12
 Provides: bundled(qtsingleapplication-qt5) = 3.2.0-gitdc8042b
 
+# https://bugzilla.redhat.com/show_bug.cgi?id=1918332
+ExcludeArch: s390x
+
 %description
 The motivation behind the project is to provide a native desktop app
 for Matrix that feels more like a mainstream chat app.
