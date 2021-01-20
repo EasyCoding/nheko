@@ -1,4 +1,5 @@
 %undefine __cmake_in_source_build
+%global _lto_cflags %{nil}
 %bcond_with clang
 
 %if %{with clang}
@@ -7,7 +8,7 @@
 
 Name: mtxclient
 Version: 0.4.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Summary: Client API library for Matrix, built on top of Boost.Asio
@@ -81,6 +82,9 @@ ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.
 %{_libdir}/*.so
 
 %changelog
+* Wed Jan 20 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-2
+- Disabled LTO due to nheko linkage issues.
+
 * Wed Jan 20 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-1
 - Updated to version 0.4.0.
 
