@@ -8,6 +8,10 @@
 
 %if %{with clang}
 %global toolchain clang
+# https://bugzilla.redhat.com/show_bug.cgi?id=1918924
+%ifarch %{arm}
+%global _lto_cflags %{nil}
+%endif
 %endif
 
 Name: nheko
