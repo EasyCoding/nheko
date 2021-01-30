@@ -16,7 +16,7 @@
 
 Name: nheko
 Version: 0.8.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 # Main source - GPLv3+
 # cpp-httplib - bundled - MIT
@@ -132,6 +132,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.8.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Wed Jan 20 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.8.0-2
 - Enabled s390x builds again.
 
