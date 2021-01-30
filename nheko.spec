@@ -15,8 +15,8 @@
 %endif
 
 Name: nheko
-Version: 0.8.0
-Release: 3%{?dist}
+Version: 0.8.1
+Release: 1%{?dist}
 
 # Main source - GPLv3+
 # cpp-httplib - bundled - MIT
@@ -132,6 +132,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Sat Jan 30 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.8.1-1
+- Updated to version 0.8.1.
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.8.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
