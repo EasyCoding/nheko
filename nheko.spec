@@ -1,10 +1,5 @@
 %undefine __cmake_in_source_build
-
-%if 0%{?fedora} && 0%{?fedora} >= 34
-%bcond_without clang
-%else
 %bcond_with clang
-%endif
 
 %if %{with clang}
 %global toolchain clang
