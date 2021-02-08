@@ -1,0 +1,24 @@
+From 375e20462ba3641db3b71c12a66533c63ac2d597 Mon Sep 17 00:00:00 2001
+From: Nicolas Werner <nicolas.werner@hotmail.de>
+Date: Sun, 7 Feb 2021 02:01:25 +0100
+Subject: [PATCH] Native rendering breaks kerning
+
+---
+ src/timeline/TimelineViewManager.cpp | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/src/timeline/TimelineViewManager.cpp b/src/timeline/TimelineViewManager.cpp
+index 93451976..dab735db 100644
+--- a/src/timeline/TimelineViewManager.cpp
++++ b/src/timeline/TimelineViewManager.cpp
+@@ -170,10 +170,6 @@ TimelineViewManager::TimelineViewManager(CallManager *callManager, ChatPage *par
+         view->setResizeMode(QQuickWidget::SizeRootObjectToView);
+         container->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+ 
+-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+-        view->quickWindow()->setTextRenderType(QQuickWindow::NativeTextRendering);
+-#endif
+-
+         connect(view, &QQuickWidget::statusChanged, this, [](QQuickWidget::Status status) {
+                 nhlog::ui()->debug("Status changed to {}", status);
+         });

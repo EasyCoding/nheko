@@ -11,7 +11,7 @@
 
 Name: nheko
 Version: 0.8.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # Main source - GPLv3+
 # cpp-httplib - bundled - MIT
@@ -21,6 +21,9 @@ License: GPLv3+ and MIT and Boost
 Summary: Desktop client for the Matrix protocol
 URL: https://github.com/Nheko-Reborn/%{name}
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+
+# https://github.com/Nheko-Reborn/nheko/commit/375e20462ba3641db3b71c12a66533c63ac2d597
+Patch100: %{name}-scaling-fixes.patch
 
 BuildRequires: cmake(MatrixClient) >= 0.4.0
 BuildRequires: cmake(Olm) >= 3.1.0
@@ -127,6 +130,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Mon Feb 08 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.8.1-2
+- Backported fonts scaling fixes.
+
 * Sat Jan 30 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.8.1-1
 - Updated to version 0.8.1.
 
