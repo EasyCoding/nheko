@@ -10,8 +10,8 @@
 %endif
 
 Name: nheko
-Version: 0.8.1
-Release: 2%{?dist}
+Version: 0.8.2
+Release: 1%{?dist}
 
 # Main source - GPLv3+
 # cpp-httplib - bundled - MIT
@@ -127,6 +127,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.*
 
 %changelog
+* Fri Apr 23 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.8.2-1
+- Updated to version 0.8.2.
+
 * Mon Feb 08 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.8.1-2
 - Backported fonts scaling fixes.
 
