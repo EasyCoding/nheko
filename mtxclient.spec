@@ -6,7 +6,7 @@
 %endif
 
 Name: mtxclient
-Version: 0.4.1
+Version: 0.5.1
 Release: 1%{?dist}
 
 License: MIT
@@ -82,6 +82,9 @@ ln -s libmatrix_client.so.%{version} %{buildroot}%{_libdir}/libmatrix_client.so.
 %{_libdir}/*.so
 
 %changelog
+* Fri Apr 23 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.1-1
+- Updated to version 0.5.1.
+
 * Sat Jan 30 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.1-1
 - Updated to version 0.4.1.
 
