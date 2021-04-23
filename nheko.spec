@@ -37,7 +37,6 @@ BuildRequires: cmake(Qt5QuickControls2)
 BuildRequires: cmake(Qt5QuickWidgets)
 BuildRequires: cmake(Qt5Svg)
 BuildRequires: cmake(Qt5Widgets)
-BuildRequires: cmake(Tweeny)
 BuildRequires: cmake(mpark_variant)
 BuildRequires: cmake(nlohmann_json) >= 3.2.0
 BuildRequires: cmake(spdlog) >= 1.0.0
