@@ -62,7 +62,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: libappstream-glib
-BuildRequires: lmdbxx-devel
+BuildRequires: lmdbxx-devel >= 1.0.0
 BuildRequires: ninja-build
 
 %if %{with clang}
