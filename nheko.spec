@@ -52,6 +52,8 @@ BuildRequires: pkgconfig(libcmark) >= 0.29.0
 BuildRequires: pkgconfig(libcrypto)
 BuildRequires: pkgconfig(lmdb)
 BuildRequires: pkgconfig(openssl)
+BuildRequires: pkgconfig(xcb)
+BuildRequires: pkgconfig(xcb-ewmh)
 BuildRequires: pkgconfig(zlib)
 
 BuildRequires: boost-devel >= 1.70
